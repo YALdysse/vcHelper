@@ -9,7 +9,7 @@
 
     <groupId>YALdysse</groupId>
     <artifactId>Vice_City_Helper</artifactId>
-    <version>build 92 Beta</version>
+    <version>build 93 Beta</version>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->

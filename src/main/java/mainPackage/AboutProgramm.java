@@ -58,9 +58,9 @@ public class AboutProgramm extends javax.swing.JFrame
         jScrollPane3 = new javax.swing.JScrollPane();
         license_jTextPane = new javax.swing.JTextPane();
 
-        Dimension minimumAndPreferredSize =  new Dimension(640,320);
+        Dimension minimumAndPreferredSize = new Dimension(640, 320);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(640,320);
+        setSize(640, 320);
         setPreferredSize(minimumAndPreferredSize);
         setMinimumSize(minimumAndPreferredSize);
 
@@ -83,13 +83,13 @@ public class AboutProgramm extends javax.swing.JFrame
         //
         try
         {
-            URL montanaFont_url = this.getClass().getClassLoader().getResource("Fonts" + File.separator + "[Roman]MontanaTypeface.ttf");
+            URL montanaFont_url = this.getClass().getClassLoader().getResource("Fonts/[Roman]MontanaTypeface.ttf");
 
             InputStream montanaFont_is = montanaFont_url.openStream();
             montanaFont = Font.createFont(Font.TRUETYPE_FONT, montanaFont_is);
             montanaFont = montanaFont.deriveFont(Font.PLAIN, 26.0f);
 
-            URL descriptionFont_url = this.getClass().getClassLoader().getResource("Fonts" + File.separator + "20648.ttf");
+            URL descriptionFont_url = this.getClass().getClassLoader().getResource("Fonts/20648.ttf");
             InputStream descriptionFont_is = descriptionFont_url.openStream();
             descriptionFont = Font.createFont(Font.PLAIN, descriptionFont_is);
 
@@ -155,23 +155,23 @@ public class AboutProgramm extends javax.swing.JFrame
         jTextPane1.setEditable(false);
         jTextPane1.setText("Выражаю благодарность:\n\t* Веб-сайту [ http://en.wikigta.org/ ] за предоставленные материалы\n\t* Веб-сайту [ http://selmiak.bplaced.net/ ] за предоставленные материалы\n\t* Веб-сайту [ https://gta.com.ua/ ] за предоставленные материалы\n\t* Веб-сайту [ https://www.flaticon.com/ ] за иконки\n\t* Веб-сайту [ https://gta.ag.ru/ ] за информацию об видеоигре" +
                 "\n\t* @joyo2 за карту Вайс-сити\n\t* @Huggito Baggio за подробную карту Вайс-сити\n\t* Веб-сайту [ https://rockstargame.su/ ] за информацию об игре\n\t* Веб-сайту [ https://games.mail.ru/ ] за материалы об игре\n\t * Веб-сайту [ https://gamesisart.ru/ ] за статью о прохождении миссий"
-        + "\n\nВнимание: Наработки, которые использовались в проекте пренадлежат авторам этих наработок (см. выше)!");
-        jTextPane1.setFont(descriptionFont.deriveFont(Font.PLAIN,15.0f));
+                + "\n\nВнимание: Наработки, которые использовались в проекте пренадлежат авторам этих наработок (см. выше)!");
+        jTextPane1.setFont(descriptionFont.deriveFont(Font.PLAIN, 15.0f));
 
         //Стиль для раздела благодарность
         SimpleAttributeSet dxd = new SimpleAttributeSet();
         StyleConstants.setFontSize(dxd, jTextPane1.getFont().getSize() + 4);
-        StyleConstants.setForeground(dxd,new Color(239, 73, 73));
-        StyleConstants.setBold(dxd,true);
+        StyleConstants.setForeground(dxd, new Color(239, 73, 73));
+        StyleConstants.setBold(dxd, true);
         int startIndex = jTextPane1.getText().indexOf("Внимание:");
         int length = jTextPane1.getText().length() - startIndex;
-        jTextPane1.getStyledDocument().setCharacterAttributes(startIndex,length, dxd, true);
+        jTextPane1.getStyledDocument().setCharacterAttributes(startIndex, length, dxd, true);
         //===============================
 
         license_jTextPane.setText("Данное программное обеспечение распостраняется по свободной лицензии GNU GPL v3. Изменение и/или распостранение исходного кода согласно условиям лицензии.");
-        license_jTextPane.setFont(descriptionFont.deriveFont(Font.ITALIC,16.0f));
+        license_jTextPane.setFont(descriptionFont.deriveFont(Font.ITALIC, 16.0f));
         license_jTextPane.setForeground(new Color(177, 122, 34, 255));
-        license_jTextPane.setBackground(new Color(238,238,238));
+        license_jTextPane.setBackground(new Color(238, 238, 238));
 
         jTextPane1.setBackground(new Color(238, 238, 238));
         jScrollPane1.setViewportView(jTextPane1);

@@ -380,7 +380,7 @@ public class main_gui extends JFrame
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         setSize(frameWidth, frameHeight);
         setResizable(false);
-        setTitle("Vice City Helper [build 92 Beta]");
+        setTitle("Vice City Helper [build 93 Beta]");
         try
         {
             BufferedImage frameIcon = ImageIO.read(mainGui_ClassLoader.getResource("Images/icon.png"));
