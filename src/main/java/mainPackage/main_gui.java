@@ -380,7 +380,7 @@ public class main_gui extends JFrame
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         setSize(frameWidth, frameHeight);
         setResizable(false);
-        setTitle("Vice City Helper [build 93 Beta]");
+        setTitle("Vice City Helper [build 94 Beta]");
         try
         {
             BufferedImage frameIcon = ImageIO.read(mainGui_ClassLoader.getResource("Images/icon.png"));
@@ -716,7 +716,7 @@ public class main_gui extends JFrame
         {
             try
             {
-                Desktop.getDesktop().browse(new URI("https://www.amk-team.ru/forum/topic/13387-prosectors-project/"));
+                Desktop.getDesktop().browse(new URI("https://github.com/YALdysse/vcHelper/tree/master"));
             }
             catch (URISyntaxException uriSynExc)
             {
