@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+<preferences EXTERNAL_XML_VERSION="1.0">
+  <root type="user">
+    <map/>
+    <node name="ViceCityHelper.localization">
+      <map>
+        <entry key="File_Menu" value="General"/>
+        <entry key="Exit_MenuItem" value="Exit"/>
+        <entry key="HowToWork_MenuItem" value="How to work with the map"/>
+        <entry key="About_MenuItem" value="About"/>
+        <entry key="Stores_JCheckBox" value="Stores"/>
+        <entry key="Weapons_JCheckBox" value="Weapons"/>
+        <entry key="Rampages_JCheckBox" value="Rampages"/>
+        <entry key="Stores_JCheckBox" value="Stores"/>
+        <entry key="Armors_JCheckBox" value="Armors"/>
+        <entry key="Health_JCheckBox" value="Health"/>
+        <entry key="Bribes_JCheckBox" value="Bribes"/>
+        <entry key="Drugs_JCheckBox" value="Drugs"/>
+        <entry key="Properties_JCheckBox" value="Properties"/>
+        <entry key="Clothes_JCheckBox" value="Clothes"/>
+        <entry key="Vehicles_JCheckBox" value="Vehicles"/>
+        <entry key="UniqueJumps_JCheckBox" value="Unique Jumps"/>
+        <entry key="SouthEast_JMenuItem" value="South East part of the Map"/>
+        <entry key="SouthWest_JMenuItem" value="South-West part of the Map"/>
+        <entry key="NorthEast_JMenuItem" value="North-East part of the Map"/>
+        <entry key="NorthWest_JMenuItem" value="North-West part of the Map"/>
+        <entry key="GoTo_JMenu" value="Go to ..."/>
+        <entry key="GoToStartScreen_JMenuItem" value="Start Screen"/>
+        <entry key="Show_JMenu" value="Show"/>
+        <entry key="ChooseMap_JLabel" value="Choose part of the Map"/>
+        <entry key="Language_JMenuItem" value="Language"/>
+        <entry key="HiddenPackages_JCheckBox" value="Hidden Packages"/>
+        <entry key="setUpScreenshotViewerSizePercent_JMenuItem" value="Set up size of ScreenshotViewer"/>
+        <entry key="HowToWorkWithMap_str" value="Press LMB to delete pickup or RMB to show screenshot."/>
+        <entry key="Secrets_JCheckBox" value="Secrets"/>
+<entry key="UniqueJump_0" value="To the west of the Washington Beach police station is another concrete block. Jump to the other side of the river."/> 
+        <entry key="UniqueJump_1" value="The same as for jump 0 only backwards. Jump over the pile of dirt. It's best to come in from the left and steer towards the street behind the police station."/> 
+        <entry key="UniqueJump_2" value="There is The concrete block to the south of the Malibu Club. You have to make it to the other side of the river. Get straight onto the ramp."/>
+        <entry key="UniqueJump_3" value="From stunt 2 just go south through the grass to find another concrete block you can use as a ramp."/> 
+        <entry key="UniqueJump_4" value="Вдоль пальмовой аллеи разгонись в южном направлении и взлети по досточкам, приставленным к стене."/> 
+        <entry key="UniqueJump_5" value="The stairs Tommy is standing on while the Colonel Cortez: Guardian Angels Mission. Drive on the ramp with some momentum towards the right as you have to jump onto the roof on the other side of the street the make the stunt count."/>
+        <entry key="UniqueJump_6" value="The stairs Lance is standing on during the Colonel Cortez: Guardian Angels mission. Drive it up coming from the east. Land in the green of the police station. Yes, smash into that wall!"/> 
+        <entry key="UniqueJump_7" value="Some more steps in the same alley as stunt 5, just a bit farther to the south. Just like for stunt 5. And while you are here, there is the hidden package #11 on the end of the roof."/> 
+        <entry key="UniqueJump_8" value="Drive farther on the alley to the south from stunt 9. There are 2 more paletts that you should use as a ramp. Drive there coming from the south, going north."/> 
+        <entry key="UniqueJump_9" value="Still in the same alley even farther south there is a small ramp made out of 2 paletts. Get lots of momentum and shortly before jumping crash into the wall to get pushed to the left so you fly to the left. Otherwise you will crash into the house on the other side of the road and the stunt won't count."/> 
+<entry key="UniqueJump_10" value="You have already completed this jump if you have completed jump 11. By using the parking lot you have to jump on the building with the stairs. There will be a chance that you do not have enough speed to get to the other side. So when that is the case, make you sure you get a better run-up."/> 
+<entry key="UniqueJump_11" value="From the southwestern end of the roof of the shopping center you get momentum and drive to the southeastern end. The slope up there will be the ramp."/> 
+<entry key="UniqueJump_12" value="From the roof of the parking lot with the green plants on the outside (you enter here to get Lance and the weapons on the Colonel Cortez: Guardian Angels mission) jump over the concrete block in the corner to the next roof in southern direction. Jump to the south, not to the west."/> 
+<entry key="UniqueJump_13" value="Look at your map. To the west of the parking lot is a place where an upside down L shows an alley. Drive this alley to the south, over the street and through the yard and up the stairs (next to the armor icon) and jump over these stairs. You also pass through here in the Checkpoint Races: Cone Crazy mission. Drive up the alley to the second mast. From there you gain enough speed to make the jump and still have enough control to chain in Stunt 33 just when you land."/> 
+<entry key="UniqueJump_14" value="The house you land on after you completed Stunt 13 has another ramp on the roof. Jump over it. Sometimes you have to land it on the house on the other side, sometimes it counts when you crash into the wall and fall into the greens..."/> 
+<entry key="UniqueJump_15" value="You will have to go the site of the eastern island. On the top floor you will find a bar which points in the northern direction. By jumping off this bar you must be able to jump over the road. Make sure you don't touch the building and you will complete the jump."/> 
+<entry key="UniqueJump_16" value="Drive into the open gate on the docks (to the north of the Colonel) and turn left. Now jump over the water with full speed. Continue on to stunt 17, so keep your balance."/> 
+<entry key="UniqueJump_17" value="Right after stunt 16 there is yet another ramp over the water. To reach the main land again jump to the left now."/> 
+<entry key="UniqueJump_18" value="This jump is located on Prawn Island. Through a staircase near the bridge of the island you are able to get on a roof. The small jump which is located on the roof enables you to get on the roof against the film studio. Jump over the ramp with maximum speed so you can jump over the wall of the film studio."/> 
+<entry key="UniqueJump_19" value="Located in Downtown, facing Ammu-Nation and close to the Schuman Health Center, you will find Unique Stunt Jump 19. Use a staircase to jump over the road and land on the opposite building. It is recommend to use a road which can function as a good run-up for this jump."/> 
+<entry key="UniqueJump_20" value="As well as its two predeccessors this stunt jump is on the route which you have to follow in the mission G-Spotlight. This is the last jump in this mission. You have a long, rectular roof at your disposal from which you can take a big run-up. Actually it's relatively easy to jump (by using the ramp) over the bridge in the direction of Prawn Island and to land on the building with the spotlight."/>
+<entry key="UniqueJump_21" value="You will find Unique Stunt Jump 21 on the same route you have to follow in the mission G-Spotlight. Completion of this mission means you do not have to complete this stunt jump again. However, when you still have to complete the jump, do it as follows: jump from the Schuman Health Center to the building on the opposite side of the road."/>
+<entry key="UniqueJump_22" value="In an alley in Little Haïti you will find Unique Stunt Jump 22. By using two wooden sconces who are located on containers you need to jump over the road. Start near yellow building with the inlet and drive as fast as possible towards the ramp. When you are driving fast enough you will be able to jump over the road, the building and the billboard which is on the building."/>
+<entry key="UniqueJump_23" value="In Little Haïti you will find, hidden between some buildings, the wooden ramp for Unique Stunt Jump 23. Take a run in the direction of Kaufman Cabs and jump by using the ramp at least over the yellow school bus. Land just behind the fences, at the level of the utility pole in the middle."/>
+<entry key="UniqueJump_24" value="For Unique Stunt Jump 24 you have to jump per wooden ramp over a kind of ditch. For this jump you will need a decent run since you have to got land just before Pay 'n Spray. Your run is often hindered by a traffic light, so wait until you get your chance for a good start."/>
+<entry key="UniqueJump_25" value="You will find jump 25 in an alley in Little Haïti. By using two ramps who are located on some containers, you have to jump over the road. When you are driving fast enough, you will be able to jump over the road and the building with advertisement."/>
+<entry key="UniqueJump_26" value="Coming from Washington Beach you drive onto Starfish Island. Take the first road to the right and the third house on the right has a locked gate. Drive on a bit and there is a small alley going to the right. Turn right from that alley and you are in front of that house. On the southern side of the house are some stairs. This is your ramp! You can get momentum from another garden where the gate is open."/> 
+<entry key="UniqueJump_27" value="Outside the main terminal of the aiport is a big billboard located with a surfer on it. Trough the right side you are able to make your jump to the airport terminal."/> 
+<entry key="UniqueJump_28" value="When you are going to the east side of the airport, you'll find a staircase. You must have enough speed to land on the roof of the customs."/>
+<entry key="UniqueJump_29" value="At the end of the (transverse) runway you will find two metal sconces. If you take the left ramp and land on the parking lot yonder, your jump will be succesful."/>
+<entry key="UniqueJump_30" value="This jump's the same jump as Unique Stunt Jump 31, but now you have to jump from the other side. You have to use a plate which is placed on the ground in order to jump over the tower. Take a long run and jump and make sure to hit the plate a bit oblique so you can jump along the right side of the turning radar tower."/> 
+<entry key="UniqueJump_31" value="Somewhere near the radar tower in the middle of the airport you will find a staircase. You must have enough speed in order to jump over the tower."/>
+<entry key="UniqueJump_32" value="As with the jump 1 and jump 5 you have to jump over the passengers trunk by using a staircase. However, the passengers trunk over which you have to jump now isn't the same as the two other jumps. If you jump over the passengers trunk without touching the trunk your jump will be succesful."/>
+<entry key="UniqueJump_33" value="Another jump is located in the airport of Liberty City. Gain speed and drive up the stairs. You have to jump over the passengers trunk without touching it. "/>
+<entry key="UniqueJump_34" value="In order to complete this jump you must jump over the same passengers trunk as Unique Stunt Jump 1, only now you have to jump in the opposite direction. Don't touch the trunk."/>
+<entry key="UniqueJump_35" value="When you have completed the mission G-Spotlight you have automatically completed this jump. You have to drive from the inside of the building through the window and jump over the road to land in the building which contains an inlet."/>
+      </map>
+    </node>
+  </root>
+</preferences>

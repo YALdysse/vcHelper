@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE preferences SYSTEM "http://java.sun.com/dtd/preferences.dtd">
+<preferences EXTERNAL_XML_VERSION="1.0">
+  <root type="user">
+    <map/>
+    <node name="Vice_City_Helper">
+      <map>
+        <entry key="Frame.X" value="219"/>
+        <entry key="Frame.Y" value="128"/>
+        <entry key="Language" value="English"/>
+        <entry key="ScreenshotViewerSizePercent" value="40"/>
+        <entry key="Warning" value="Куда полез ? - А ну закрывай!"/>
+        <entry key="showTutorialOnMap" value="0"/>
+        <entry key="startScreenFontFileName" value="Rage_Italic_LET_Plain_1.0.ttf"/>
+        <entry key="fixGraphicsArtifactsOnWindows" value="1"/>
+      </map>
+    </node>
+  </root>
+</preferences>
