@@ -30,11 +30,13 @@ import java.io.IOException;
 
 public class PropertyButtonAction extends MouseAdapter
 {
-    double[][] propertiesData;
+    private double[][] propertiesData;
+    private main_gui gui_obj;
 
-    public PropertyButtonAction(double[][] aPropertiesData)
+    public PropertyButtonAction(double[][] aPropertiesData, main_gui aGui_obj)
     {
         propertiesData = aPropertiesData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -43,6 +45,36 @@ public class PropertyButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] propertyButtons = gui_obj.getPropertyButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < propertyButtons.length; k++)
+            {
+                if (propertyButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getProperties_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getProperties_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getProperties_JCheckBox().setSelected(false);
+                gui_obj.getShowProperties_JMenuItem().setSelected(false);
+                gui_obj.getProperties_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

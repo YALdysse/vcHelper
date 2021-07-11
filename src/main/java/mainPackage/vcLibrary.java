@@ -316,21 +316,22 @@ public class vcLibrary extends javax.swing.JFrame
                             BufferedImage bandIcon = ImageIO.read(this.getClass().getClassLoader().getResource("Images/Bands/" + dbReader.getResultSet().getString("band_image_name") + ".jpg"));
                             image_psevdoImageBox.addImage(bandIcon);
                             image_psevdoImageBox.setImageFitStyle(psevdoImageBox.FIT_IMAGE_TO_COMPONENT, true);
-                            image_psevdoImageBox.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(126, 153, 170), 6),
+                            image_psevdoImageBox.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(148, 177, 196), 6),
                                     BorderFactory.createEmptyBorder(2, 2, 2, 2)));
                             //image_psevdoImageBox.setLocation(500,500);
                         }
                         catch (IOException ioExc)
                         {
+                            loadNoImage();
                             DebugTools.printDebugMessage("Ошибка загрузки изображения: " + titleOfArticle_jLabel.getText());
                             DebugTools.createLogFile(ioExc);
                         }
                         catch (IllegalArgumentException iArgExc)
                         {
-                            JOptionPane.showMessageDialog(this, "Изображение " + titleOfArticle_jLabel.getText() + " не было загружено.", "Ошибка загрузки изображения", JOptionPane.ERROR_MESSAGE, null);
+                            loadNoImage();
+                            //JOptionPane.showMessageDialog(this, "Изображение " + titleOfArticle_jLabel.getText() + " не было загружено.", "Ошибка загрузки изображения", JOptionPane.ERROR_MESSAGE, null);
                             DebugTools.printDebugMessage("Ошибка при загрузке изображения: " + titleOfArticle_jLabel.getText() + " из ресурсов.");
                             DebugTools.createLogFile(iArgExc);
-                            image_psevdoImageBox.addImage(null);
                         }
 
                         description_jTextPane.setText(dbReader.getResultSet().getString("band_description"));
@@ -403,6 +404,7 @@ public class vcLibrary extends javax.swing.JFrame
                         {
                             //Ха, а описание категории транспорта в БД нету!!!
                             titleOfArticle_jLabel.setText(dbReader.getResultSet().getString("VehicleCategory_name"));
+                            loadNoImage();
                             break;
                         } else
                         {
@@ -493,6 +495,7 @@ public class vcLibrary extends javax.swing.JFrame
                             {
                                 titleOfArticle_jLabel.setText(dbReader.getResultSet().getString("weaponCategory_name"));
                                 description_jTextPane.setText(dbReader.getResultSet().getString("weaponCategory_description"));
+                                loadNoImage();
                                 break;
                             }
                         }
@@ -541,15 +544,11 @@ public class vcLibrary extends javax.swing.JFrame
                         }
                         catch (IOException ioExc)
                         {
-                            DebugTools.printDebugMessage("Ошибка загрузки изображения: " + titleOfArticle_jLabel.getText());
-                            DebugTools.createLogFile(ioExc);
+                            loadNoImage();
                         }
                         catch (IllegalArgumentException iArgExc)
                         {
-                            JOptionPane.showMessageDialog(this, "Изображение " + titleOfArticle_jLabel.getText() + " не было загружено.", "Ошибка загрузки изображения", JOptionPane.ERROR_MESSAGE, null);
-                            DebugTools.printDebugMessage("Ошибка при загрузке изображения: " + titleOfArticle_jLabel.getText() + " из ресурсов.");
-                            DebugTools.createLogFile(iArgExc);
-                            image_psevdoImageBox.addImage(null);
+                            loadNoImage();
                         }
 
                         strBuilder_obj.delete(0, strBuilder_obj.capacity());
@@ -611,6 +610,7 @@ public class vcLibrary extends javax.swing.JFrame
                             titleOfArticle_jLabel.setText(dbReader.getResultSet().getString("mission_name"));
                             description_jTextPane.setText(dbReader.getResultSet().getString("mission_description") + "\n\n\tНаграда: " + dbReader.getResultSet().getString("mission_reward"));
                             description_jTextPane.setVisible(true);
+                            loadNoImage();
                             addStyleToMissionDescription();
 
                             String imageName = dbReader.getResultSet().getString("mission_image_name");
@@ -624,6 +624,7 @@ public class vcLibrary extends javax.swing.JFrame
                                 catch (IOException ioExc
                                 )
                                 {
+                                    loadNoImage();
                                     DebugTools.printDebugMessage("Возникла ошибка при загрузке изображения миссии:" + currentNodeName_str);
                                 }
                             }
@@ -667,6 +668,7 @@ public class vcLibrary extends javax.swing.JFrame
 //                        }
                         description_jTextPane.setText(dbReader.getResultSet().getString("aboutGame_description"));
                         description_jTextPane.setVisible(true);
+                        loadNoImage();
 
                         if (titleOfArticle_jLabel.getText().equals("Полное прохождение"))
                         {
@@ -1214,6 +1216,20 @@ public class vcLibrary extends javax.swing.JFrame
                 );
                 fixTitleSize();
             }
+        }
+    }
+
+    public void loadNoImage()
+    {
+        try
+        {
+            BufferedImage weaponIcon = ImageIO.read(this.getClass().getClassLoader().getResource("Images/noImage.png"));
+            image_psevdoImageBox.addImage(weaponIcon);
+            image_psevdoImageBox.setImageFitStyle(psevdoImageBox.FIT_IMAGE_TO_COMPONENT, true);
+        }
+        catch (IOException ioExc2)
+        {
+
         }
     }
 }

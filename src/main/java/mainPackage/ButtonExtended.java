@@ -279,7 +279,5 @@ public class ButtonExtended extends JButton
             }
             return maxString;
         }
-
-
     }
 }

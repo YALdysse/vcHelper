@@ -41,11 +41,13 @@ import java.io.IOException;
 
 public class HiddenPackageButtonAction extends MouseAdapter
 {
-    double[][] hiddenPackagesData;
+    private double[][] hiddenPackagesData;
+    private main_gui gui_obj;
 
-    public HiddenPackageButtonAction(final double[][] aHiddenPackagesData)
+    public HiddenPackageButtonAction(final double[][] aHiddenPackagesData, main_gui aGui_obj)
     {
         hiddenPackagesData = aHiddenPackagesData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -54,6 +56,36 @@ public class HiddenPackageButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] getHiddenPackagesButtons = gui_obj.getHiddenPackagesButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < getHiddenPackagesButtons.length; k++)
+            {
+                if (getHiddenPackagesButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getHiddenPackages_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getHiddenPackages_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getHiddenPackages_JCheckBox().setSelected(false);
+                gui_obj.getShowHiddenPackages_JMenuItem().setSelected(false);
+                gui_obj.getHiddenPackages_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

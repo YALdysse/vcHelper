@@ -20,6 +20,7 @@ package mouseActions;
 import mainPackage.ButtonExtended;
 import mainPackage.DebugTools;
 import mainPackage.ScreenshotViewer;
+import mainPackage.main_gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -33,11 +34,13 @@ public class UniqueJumpAction extends MouseAdapter
 {
     private double[][] uniqueJumpsData;
     private ClassLoader classLoad;
+    private main_gui gui_obj;
 
-    public UniqueJumpAction(final double[][] aUniqueJumpsData, ClassLoader cl)
+    public UniqueJumpAction(final double[][] aUniqueJumpsData, ClassLoader cl, main_gui aGui_obj)
     {
         uniqueJumpsData = aUniqueJumpsData;
         classLoad = cl;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -47,6 +50,36 @@ public class UniqueJumpAction extends MouseAdapter
             ButtonExtended tmpButton = (ButtonExtended) e.getSource();
             tmpButton.closeExtendedToolTip();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] uniqueJumpButtons = gui_obj.getUniqueJumpButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < uniqueJumpButtons.length; k++)
+            {
+                if (uniqueJumpButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getUniqueJumps_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getUniqueJumps_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getUniqueJumps_JCheckBox().setSelected(false);
+                gui_obj.getShowUniqueJumps_JMenuItem().setSelected(false);
+                gui_obj.getUniqueJumps_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

@@ -35,6 +35,10 @@
         <entry key="Language_JMenuItem" value="Изменить язык"/>
         <entry key="HiddenPackages_JCheckBox" value="Скрытые пакеты"/>
         <entry key="setUpScreenshotViewerSizePercent_JMenuItem" value="Задать размер просмотрщика изображений"/>
+        <entry key="North_East_part_toolTip" value="Северо-Восточная часть Вайс-Сити"/>
+        <entry key="North_West_part_toolTip" value="Северо-Западная часть Вайс-Сити"/>
+        <entry key="South_East_part_toolTip" value="Юго-Восточная часть Вайс-Сити"/>
+        <entry key="South_West_part_toolTip" value="Юго-Западная часть Вайс-Сити"/>
         <entry key="HowToWorkWithMap_str" value="При наведении курсора на отметку, будет отображена всплывающая подсказка. Чтобы посмотреть, где находится пикап, нажмите на него левой кнопкой мыши. Для удаления отметки нажмите на нее правой кнопкой мыши."/>
         <entry key="HowToWorkWithMap_title" value="Как работать с картой ?"/>
         <entry key="Molotov_weapon" value="Коктейль Молотова"/>

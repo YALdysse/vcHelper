@@ -30,11 +30,13 @@ import java.io.IOException;
 
 public class WeaponButtonAction extends MouseAdapter
 {
-    double[][] weaponsData;
+    private double[][] weaponsData;
+    private main_gui gui_obj;
 
-    public WeaponButtonAction(final double[][] aWeaponsData)
+    public WeaponButtonAction(final double[][] aWeaponsData, main_gui aGui_obj)
     {
         weaponsData = aWeaponsData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -43,6 +45,36 @@ public class WeaponButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] weaponButtons = gui_obj.getWeaponButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < weaponButtons.length; k++)
+            {
+                if (weaponButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getWeapons_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getWeapons_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getWeapons_JCheckBox().setSelected(false);
+                gui_obj.getShowWeapons_JMenuItem().setSelected(false);
+                gui_obj.getWeapons_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

@@ -9,7 +9,7 @@
 
     <groupId>YALdysse</groupId>
     <artifactId>Vice_City_Helper</artifactId>
-    <version>build 94 Beta</version>
+    <version>build 95 Beta</version>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
@@ -25,7 +25,6 @@
             <artifactId>maven-shade-plugin</artifactId>
             <version>3.2.4</version>
         </dependency>
-
 
     </dependencies>
 

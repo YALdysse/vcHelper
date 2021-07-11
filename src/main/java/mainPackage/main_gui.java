@@ -26,15 +26,16 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.InvalidPreferencesFormatException;
 import java.util.prefs.Preferences;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.text.Document;
-import javax.swing.text.html.HTMLDocument;
-
 
 /*Как преобразовывать из URL в File:
  *   new File(URL.toURI)
@@ -50,7 +51,7 @@ import javax.swing.text.html.HTMLDocument;
  * Главный фрейм программы
  * Разработка: 21.04.2021 - 08.05.2021, 17.05.2021
  *
- * @author Y@L
+ * @author Y@Ldysse
  */
 //public class main_gui extends javax.swing.JFrame
 public class main_gui extends JFrame
@@ -380,7 +381,7 @@ public class main_gui extends JFrame
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         setSize(frameWidth, frameHeight);
         setResizable(false);
-        setTitle("Vice City Helper [build 94 Beta]");
+        setTitle("Vice City Helper [build 95 Beta]");
         try
         {
             BufferedImage frameIcon = ImageIO.read(mainGui_ClassLoader.getResource("Images/icon.png"));
@@ -479,26 +480,26 @@ public class main_gui extends JFrame
         selectMapPart_JLabel.setFont(rageItalic_Font.deriveFont(sizeRageItalic));
         selectMapPart_JLabel.setForeground(viceCityFontColor);
 
-        northWestPart_JButton.setToolTipText("Северо-Западная часть Вайс-Сити");
+        northWestPart_JButton.setToolTipText("North-West part of Vice City");
         northWestPart_JButton.addActionListener((event)
                 ->
         {
             NorthWestPart_JButton_Action();
         });
 
-        northEastPart_JButton.setToolTipText("Северо-Восточная часть Вайс-Сити");
+        northEastPart_JButton.setToolTipText("North-East part of Vice City");
         northEastPart_JButton.addActionListener((event) ->
         {
             northEastPart_JButton_Action();
         });
 
-        southWestPart_JButton.setToolTipText("Юго-Западная часть Вайс-Сити");
+        southWestPart_JButton.setToolTipText("South-West part of Vice City");
         southWestPart_JButton.addActionListener((event) ->
         {
             southWestPart_JButton_Action();
         });
 
-        southEastPart_JButton.setToolTipText("Юго-Восточная часть Вайс-Сити");
+        southEastPart_JButton.setToolTipText("South-East part of Vice City");
         southEastPart_JButton.addActionListener((event) ->
         {
             southEastPart_JButton_Action();
@@ -687,7 +688,7 @@ public class main_gui extends JFrame
             showHowToWorkMessage();
         });
 
-        changeLanguage_MenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3,0));
+        changeLanguage_MenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
         changeLanguage_MenuItem.addActionListener((event) ->
         {
             changeLanguage_MenuItemAction();
@@ -846,14 +847,21 @@ public class main_gui extends JFrame
 
         DebugTools.printDebugMessage("Сохраняем " + mapListforSave[0]);
         String currentMap_str = null;
+
         try
         {
-            BufferedImage mapToSave_tmp = null;
+            File mapToSave_file = null;
+            InputStream sourceFile_is = null;
 
             if (result_str.equals(mapListforSave[0]))
-                mapToSave_tmp = ImageIO.read(mainGui_ClassLoader.getResource("Images/Vice_City_Map_original.png"));
+            {
+                sourceFile_is = this.getClass().getClassLoader().getResource("Images/Vice_City_Map_original.png").openStream();
+            }
+
             if (result_str.equals(mapListforSave[1]))
-                mapToSave_tmp = ImageIO.read(mainGui_ClassLoader.getResource("Images/vice_city_map_fixed.png"));
+            {
+                sourceFile_is = this.getClass().getClassLoader().getResource("Images/vice_city_map_fixed.png").openStream();
+            }
 
             File outputFile = chooseSaveFolder();
 
@@ -866,13 +874,11 @@ public class main_gui extends JFrame
                 currentMap_str = "Vice_City_HQ_Detailed_Map_by_Huggito-Baggio.png";
             }
 
-            ImageIO.write(mapToSave_tmp, "png", new File(outputFile.getParent() + "/" + currentMap_str));
+            Files.copy(sourceFile_is, new File(outputFile.getParent() + "/" + currentMap_str).toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-            //ImageIO.write(mapToSave_tmp, "png", new File(DebugTools.getJarLocation().getParent()));
             DebugTools.printDebugMessage("Путь сохранения изображения:" + outputFile.getAbsolutePath());
             JOptionPane.showMessageDialog(this, "Image location: " + outputFile.getParent() + currentMap_str, "Image saved successfully", JOptionPane.INFORMATION_MESSAGE, null);
             return true;
-
         }
         catch (IOException ioExc)
         {
@@ -880,6 +886,12 @@ public class main_gui extends JFrame
             DebugTools.createLogFile(ioExc);
             return false;
         }
+//        catch (URISyntaxException uriSynExc)
+//        {
+//            DebugTools.printDebugMessage("Возникла ошибка ");
+//            DebugTools.createLogFile(uriSynExc);
+//            return false;
+//        }
     }
 
     public File chooseSaveFolder()
@@ -1990,6 +2002,10 @@ public class main_gui extends JFrame
             setUpScreenshotViewerSizePercent_JMenuItem.setText(localPref.get("setUpScreenshotViewerSizePercent_JMenuItem", "Set up size of ScreenshotViewer"));
             goToLibrary_JMenuItem.setText(localPref.get("GoToLibrary_JMenuItem", "Library"));
             openPageWithGitHubRepository.setText(localPref.get("OpenPageWithGitHubRepository_JMenuItem", "Repository on GitHub"));
+            northEastPart_JButton.setToolTipText(localPref.get("North_East_part_toolTip", "North-East part of Vice City"));
+            northWestPart_JButton.setToolTipText(localPref.get("North_West_part_toolTip", "North-West part of Vice City"));
+            southEastPart_JButton.setToolTipText(localPref.get("South_East_part_toolTip", "South-East part of Vice City"));
+            southWestPart_JButton.setToolTipText(localPref.get("South_West_part_toolTip", "South-West part of Vice City"));
 
             showStores_JMenuItem.setText(stores_str);
             showWeapons_JMenuItem.setText(weapons_str);
@@ -2794,11 +2810,11 @@ public class main_gui extends JFrame
                 currentPartMedkitData = getNewArrayWithCorrespondingData(medkitData, 0.1);
             }
 
-            Medkit_jCheckBox.setText("Аптечки" + " [" + currentPartMedkitData.length + "]");
+            Medkit_jCheckBox.setText("[" + currentPartMedkitData.length + "] " + medkit_str);
 
 
             medkitButton = new JButton[currentPartMedkitData.length];
-            MedkitButtonAction medkitButAction = new MedkitButtonAction(medkitData);
+            MedkitButtonAction medkitButAction = new MedkitButtonAction(medkitData, this);
 
             //=======
             Map.setMedkitData(currentPartMedkitData);
@@ -2859,9 +2875,9 @@ public class main_gui extends JFrame
                 currentPartArmorData = getNewArrayWithCorrespondingData(armorData, 0.1);
             }
 
-            Armor_JCheckBox.setText(armor_str + " [" + currentPartArmorData.length + "]");
+            Armor_JCheckBox.setText("[" + currentPartArmorData.length + "] " + armor_str);
             armorButton = new JButton[currentPartArmorData.length];
-            mouseActions.ArmorButtonAction armorButtonAction = new mouseActions.ArmorButtonAction(armorData);
+            mouseActions.ArmorButtonAction armorButtonAction = new mouseActions.ArmorButtonAction(armorData, this);
             for (int k = 0; k < armorButton.length; k++)
             {
                 armorButton[k] = new JButton("");
@@ -2915,9 +2931,9 @@ public class main_gui extends JFrame
             {
                 currentPartBribesData = getNewArrayWithCorrespondingData(bribesData, 0.1);
             }
-            Bribes_JCheckBox.setText(bribes_str + " [" + currentPartBribesData.length + "]");
+            Bribes_JCheckBox.setText("[" + currentPartBribesData.length + "] " + bribes_str);
             bribeButton = new JButton[currentPartBribesData.length];
-            mouseActions.BribeButtonAction bribeButtonAction = new mouseActions.BribeButtonAction(bribesData);
+            mouseActions.BribeButtonAction bribeButtonAction = new mouseActions.BribeButtonAction(bribesData, this);
             for (int k = 0; k < bribeButton.length; k++)
             {
                 bribeButton[k] = new JButton("");
@@ -2972,9 +2988,9 @@ public class main_gui extends JFrame
                 currentPartDrugsData = getNewArrayWithCorrespondingData(drugsData, 0.1);
             }
 
-            Drugs_JCheckBox.setText(drugs_str + " [" + currentPartDrugsData.length + "]");
+            Drugs_JCheckBox.setText("[" + currentPartDrugsData.length + "] " + drugs_str);
             drugButton = new JButton[currentPartDrugsData.length];
-            mouseActions.DrugButtonAction drugButAction = new mouseActions.DrugButtonAction(drugsData);
+            mouseActions.DrugButtonAction drugButAction = new mouseActions.DrugButtonAction(drugsData, this);
             for (int k = 0; k < drugButton.length; k++)
             {
                 drugButton[k] = new JButton("");
@@ -3028,9 +3044,9 @@ public class main_gui extends JFrame
             {
                 currentPartSpraiesData = getNewArrayWithCorrespondingData(spraiesData, 0.1);
             }
-            Spraies_JCheckBox.setText(sprays_str + " [" + currentPartSpraiesData.length + "]");
+            Spraies_JCheckBox.setText("[" + currentPartSpraiesData.length + "] " + sprays_str);
             sprayButton = new JButton[currentPartSpraiesData.length];
-            mouseActions.SprayButtonAction sprayButAction = new mouseActions.SprayButtonAction(spraiesData);
+            mouseActions.SprayButtonAction sprayButAction = new mouseActions.SprayButtonAction(spraiesData, this);
             for (int k = 0; k < sprayButton.length; k++)
             {
                 sprayButton[k] = new JButton("");
@@ -3086,9 +3102,9 @@ public class main_gui extends JFrame
                 {
                     currentPartPropertiesData = getNewArrayWithCorrespondingData(propertiesData, 0.1);
                 }
-                Properties_JCheckBox.setText(properties_str + " [" + currentPartPropertiesData.length + "]");
+                Properties_JCheckBox.setText("[" + currentPartPropertiesData.length + "] " + properties_str);
                 propertiesButton = new ButtonExtended[currentPartPropertiesData.length];
-                mouseActions.PropertyButtonAction propertyButAction = new mouseActions.PropertyButtonAction(propertiesData);
+                mouseActions.PropertyButtonAction propertyButAction = new mouseActions.PropertyButtonAction(propertiesData, this);
                 for (int k = 0; k < propertiesButton.length; k++)
                 {
                     propertiesButton[k] = new ButtonExtended();
@@ -3244,9 +3260,9 @@ public class main_gui extends JFrame
                 currentPartRampagesData = getNewArrayWithCorrespondingData(rampagesData, 0.1);
             }
 
-            Rampages_JCheckBox.setText(rampages_str + " [" + currentPartRampagesData.length + "]");
+            Rampages_JCheckBox.setText("[" + currentPartRampagesData.length + "] " + rampages_str);
             rampageButton = new ButtonExtended[currentPartRampagesData.length];
-            mouseActions.RampageButtonAction rampageButAction = new mouseActions.RampageButtonAction(rampagesData);
+            mouseActions.RampageButtonAction rampageButAction = new mouseActions.RampageButtonAction(rampagesData, this);
             for (int k = 0; k < rampageButton.length; k++)
             {
                 rampageButton[k] = new ButtonExtended();
@@ -3486,9 +3502,9 @@ public class main_gui extends JFrame
                 currentPartClothesData = getNewArrayWithCorrespondingData(clothesData, 0.1);
             }
 
-            Clothes_JCheckBox.setText(clothes_str + " [" + currentPartClothesData.length + "]");
+            Clothes_JCheckBox.setText("[" + currentPartClothesData.length + "] " + clothes_str);
             clothesButton = new ButtonExtended[currentPartClothesData.length];
-            ClothesButtonAction clothesButAction = new ClothesButtonAction(clothesData);
+            ClothesButtonAction clothesButAction = new ClothesButtonAction(clothesData, this);
             for (int k = 0; k < clothesButton.length; k++)
             {
                 clothesButton[k] = new ButtonExtended();
@@ -3590,8 +3606,6 @@ public class main_gui extends JFrame
             }
 
             Map.repaint();
-
-
         } else
         {
             showClothes_JMenuItem.setSelected(false);
@@ -3631,11 +3645,11 @@ public class main_gui extends JFrame
                 currentPartWeaponsData = getNewArrayWithCorrespondingData(weaponsData, 0.1);
             }
 
-            Weapons_JCheckBox.setText(weapons_str + " [" + currentPartWeaponsData.length + "]");
+            Weapons_JCheckBox.setText("[" + currentPartWeaponsData.length + "] " + weapons_str);
             //weaponButton = new JButton[currentPartWeaponsData.length];
             weaponButton = new ButtonExtended[currentPartWeaponsData.length];
 
-            WeaponButtonAction weaponButAction = new WeaponButtonAction(weaponsData);
+            WeaponButtonAction weaponButAction = new WeaponButtonAction(weaponsData, this);
             for (int k = 0; k < weaponButton.length; k++)
             {
                 weaponButton[k] = new ButtonExtended();
@@ -3945,9 +3959,9 @@ public class main_gui extends JFrame
                 currentPartStoresData = getNewArrayWithCorrespondingData(storesData, 0.1);
             }
 
-            Stores_JCheckBox.setText(stores_str + " [" + currentPartStoresData.length + "]");
+            Stores_JCheckBox.setText("[" + currentPartStoresData.length + "] " + stores_str);
             storeButton = new ButtonExtended[currentPartStoresData.length];
-            StoreButtonAction storeButAction = new StoreButtonAction(storesData);
+            StoreButtonAction storeButAction = new StoreButtonAction(storesData, this);
             for (int k = 0; k < storeButton.length; k++)
             {
                 storeButton[k] = new ButtonExtended();
@@ -4055,7 +4069,7 @@ public class main_gui extends JFrame
 
     private void vehicles_CheckBoxAction()
     {
-        JOptionPane.showMessageDialog(this, "Внимание: Это раздел требует доработки", "В разработке", JOptionPane.INFORMATION_MESSAGE, null);
+        //JOptionPane.showMessageDialog(this, "Внимание: Это раздел требует доработки", "В разработке", JOptionPane.INFORMATION_MESSAGE, null);
         if (Vehicles_JCheckBox.isSelected())
         {
             showVehicles_JMenuItem.setSelected(true);
@@ -4081,9 +4095,9 @@ public class main_gui extends JFrame
                 currentPartVehiclesData = getNewArrayWithCorrespondingData(vehiclesData, 0.1);
             }
 
-            Vehicles_JCheckBox.setText(vehicles_str + " [" + currentPartVehiclesData.length + "]");
+            Vehicles_JCheckBox.setText("[" + currentPartVehiclesData.length + "] " + vehicles_str);
             vehicleButton = new ButtonExtended[currentPartVehiclesData.length];
-            VehicleButtonAction vehicleButAction = new VehicleButtonAction(vehiclesData, mainGui_ClassLoader);
+            VehicleButtonAction vehicleButAction = new VehicleButtonAction(vehiclesData, mainGui_ClassLoader, this);
             for (int k = 0; k < vehicleButton.length; k++)
             {
                 vehicleButton[k] = new ButtonExtended();
@@ -4448,9 +4462,9 @@ public class main_gui extends JFrame
                 currentPartUniqueJumpsData = getNewArrayWithCorrespondingData(uniqueJumpsData, 0.1);
             }
 
-            UniqueJumps_JCheckBox.setText(uniqueJumps_str + " [" + currentPartUniqueJumpsData.length + "]");
+            UniqueJumps_JCheckBox.setText("[" + currentPartUniqueJumpsData.length + "] " + uniqueJumps_str);
             uniqueJumpButton = new ButtonExtended[currentPartUniqueJumpsData.length];
-            UniqueJumpAction uniqueJumpAction = new UniqueJumpAction(uniqueJumpsData, mainGui_ClassLoader);
+            UniqueJumpAction uniqueJumpAction = new UniqueJumpAction(uniqueJumpsData, mainGui_ClassLoader, this);
             for (int k = 0; k < uniqueJumpButton.length; k++)
             {
                 uniqueJumpButton[k] = new ButtonExtended();
@@ -4753,9 +4767,9 @@ public class main_gui extends JFrame
                 currentPartHiddenPackagesData = getNewArrayWithCorrespondingData(hiddenPackagesData, 0.1);
             }
 
-            HiddenPackages_JCheckBox.setText(hiddenPackages_str + " [" + currentPartHiddenPackagesData.length + "]");
+            HiddenPackages_JCheckBox.setText("[" + currentPartHiddenPackagesData.length + "] " + hiddenPackages_str);
             hiddenPackagesButton = new JButton[currentPartHiddenPackagesData.length];
-            HiddenPackageButtonAction hiddenPackagesAction = new HiddenPackageButtonAction(hiddenPackagesData);
+            HiddenPackageButtonAction hiddenPackagesAction = new HiddenPackageButtonAction(hiddenPackagesData, this);
             for (int k = 0; k < hiddenPackagesButton.length; k++)
             {
                 hiddenPackagesButton[k] = new JButton("");
@@ -4811,9 +4825,9 @@ public class main_gui extends JFrame
                 currentPartSecretsData = getNewArrayWithCorrespondingData(secretsData, 0.1);
             }
 
-            Secrets_JCheckBox.setText(secrets_str + " [" + currentPartSecretsData.length + "]");
+            Secrets_JCheckBox.setText("[" + currentPartSecretsData.length + "] " + secrets_str);
             secretsButton = new ButtonExtended[currentPartSecretsData.length];
-            SecretButtonAction secretButAction = new SecretButtonAction(secretsData);
+            SecretButtonAction secretButAction = new SecretButtonAction(secretsData, this);
             for (int k = 0; k < secretsButton.length; k++)
             {
                 secretsButton[k] = new ButtonExtended();
@@ -7089,6 +7103,217 @@ public class main_gui extends JFrame
     public Preferences getPref()
     {
         return pref;
+    }
+
+    public ButtonExtended[] getVehicleButtons()
+    {
+        return vehicleButton;
+    }
+
+    public JButton[] getArmorButtons()
+    {
+        return armorButton;
+    }
+
+    public JButton[] getBribeButtons()
+    {
+        return bribeButton;
+    }
+
+    public JButton[] getClothesButtons()
+    {
+        return clothesButton;
+    }
+
+    public JButton[] getDrugButton()
+    {
+        return drugButton;
+    }
+
+    public JButton[] getHiddenPackagesButtons()
+    {
+        return hiddenPackagesButton;
+    }
+
+    public JButton[] getMedkitButtons()
+    {
+        return medkitButton;
+    }
+
+    public ButtonExtended[] getRampegeButtons()
+    {
+        return rampageButton;
+    }
+
+    public ButtonExtended[] getUniqueJumpButtons()
+    {
+        return uniqueJumpButton;
+    }
+
+    public JButton[] getStoreButtons()
+    {
+        return storeButton;
+    }
+
+    public ButtonExtended[] getPropertyButtons()
+    {
+        return propertiesButton;
+    }
+
+    public ButtonExtended[] getWeaponButtons()
+    {
+        return weaponButton;
+    }
+
+    public ButtonExtended[] getSecretsButtons()
+    {
+        return secretsButton;
+    }
+
+    public JButton[] getSprayButtons()
+    {
+        return sprayButton;
+    }
+
+    public JCheckBox getVehicle_CheckBox()
+    {
+        return Vehicles_JCheckBox;
+    }
+
+    public JCheckBox getArmor_JCheckBox()
+    {
+        return Armor_JCheckBox;
+    }
+
+    public JCheckBox getBribes_JCheckBox()
+    {
+        return Bribes_JCheckBox;
+    }
+
+    public JCheckBox getHiddenPackages_JCheckBox()
+    {
+        return HiddenPackages_JCheckBox;
+    }
+
+    public JCheckBox getClothes_JCheckBox()
+    {
+        return Clothes_JCheckBox;
+    }
+
+    public JCheckBox getWeapons_JCheckBox()
+    {
+        return Weapons_JCheckBox;
+    }
+
+    public JCheckBox getProperties_JCheckBox()
+    {
+        return Properties_JCheckBox;
+    }
+
+    public JCheckBox getStores_JCheckBox()
+    {
+        return Stores_JCheckBox;
+    }
+
+    public JCheckBox getMedkit_jCheckBox()
+    {
+        return Medkit_jCheckBox;
+    }
+
+    public JCheckBox getDrugs_JCheckBox()
+    {
+        return Drugs_JCheckBox;
+    }
+
+    public JCheckBox getRampages_JCheckBox()
+    {
+        return Rampages_JCheckBox;
+    }
+
+    public JCheckBox getUniqueJumps_JCheckBox()
+    {
+        return UniqueJumps_JCheckBox;
+    }
+
+    public JCheckBox getSpraies_JCheckBox()
+    {
+        return Spraies_JCheckBox;
+    }
+
+
+    public JCheckBox getSecrets_JCheckBox()
+    {
+        return Secrets_JCheckBox;
+    }
+
+    public JCheckBoxMenuItem getShowVehicles_JMenuItem()
+    {
+        return showVehicles_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowHiddenPackages_JMenuItem()
+    {
+        return showHiddenPackages_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowClothes_JMenuItem()
+    {
+        return showClothes_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowWeapons_JMenuItem()
+    {
+        return showWeapons_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowProperties_JMenuItem()
+    {
+        return showProperties_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowStores_JMenuItem()
+    {
+        return showStores_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowMedkit_JMenuItem()
+    {
+        return showMedkit_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowDrugs_JMenuItem()
+    {
+        return showDrugs_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowArmor_JMenuItem()
+    {
+        return showArmor_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowBribes_JMenuItem()
+    {
+        return showBribes_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowRampages_JMenuItem()
+    {
+        return showRampages_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowUniqueJumps_JMenuItem()
+    {
+        return showUniqueJumps_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowSecrets_JMenuItem()
+    {
+        return showSecrets_JMenuItem;
+    }
+
+    public JCheckBoxMenuItem getShowSpraies_JMenuItem()
+    {
+        return showSpraies_JMenuItem;
     }
 
     private double[][] getNewArrayWithCorrespondingData(double[][] input, final double value)

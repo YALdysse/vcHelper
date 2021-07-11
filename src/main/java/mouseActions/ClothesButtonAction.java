@@ -30,18 +30,51 @@ import java.io.IOException;
 
 public class ClothesButtonAction extends MouseAdapter
 {
-    double[][] clothesData;
-    public ClothesButtonAction(double[][] aClothesData)
+    private double[][] clothesData;
+    private main_gui gui_obj;
+
+    public ClothesButtonAction(double[][] aClothesData, main_gui aGui_obj)
     {
-      clothesData=aClothesData;
+        clothesData = aClothesData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
     {
-        if(e.getButton()==MouseEvent.BUTTON3)
+        if (e.getButton() == MouseEvent.BUTTON3)
         {
-            JButton tmpButton = (JButton)e.getSource();
+            JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] clothesButtons = gui_obj.getClothesButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < clothesButtons.length; k++)
+            {
+                if (clothesButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getClothes_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getClothes_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getClothes_JCheckBox().setSelected(false);
+                gui_obj.getShowClothes_JMenuItem().setSelected(false);
+                gui_obj.getClothes_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {
@@ -57,7 +90,7 @@ public class ClothesButtonAction extends MouseAdapter
                         try
                         {
                             BufferedImage bufImg = ImageIO.read(main_gui.mainGui_ClassLoader.getResource("Images/Screenshots/Clothes/clothes_" + k + ".jpg"));
-                            ScreenshotViewer view = new ScreenshotViewer(bufImg, "clothes_"+k);
+                            ScreenshotViewer view = new ScreenshotViewer(bufImg, "clothes_" + k);
                             view.setImageScallingPercent(100);
                             view.setVisible(true);
                             break;

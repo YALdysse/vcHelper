@@ -30,11 +30,13 @@ import java.io.IOException;
 
 public class SprayButtonAction extends MouseAdapter
 {
-    double[][] spraiesData;
+    private double[][] spraiesData;
+    private main_gui gui_obj;
 
-    public SprayButtonAction(final double[][] aSpraiesData)
+    public SprayButtonAction(final double[][] aSpraiesData, main_gui aGui_obj)
     {
         spraiesData = aSpraiesData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -43,6 +45,36 @@ public class SprayButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] sprayButtons = gui_obj.getSprayButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < sprayButtons.length; k++)
+            {
+                if (sprayButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getSpraies_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getSpraies_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getSpraies_JCheckBox().setSelected(false);
+                gui_obj.getShowSpraies_JMenuItem().setSelected(false);
+                gui_obj.getSpraies_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {
@@ -58,7 +90,7 @@ public class SprayButtonAction extends MouseAdapter
                         try
                         {
                             BufferedImage bufImg = ImageIO.read(main_gui.mainGui_ClassLoader.getResource("Images/Screenshots/Spraies/spray_" + k + ".jpg"));
-                            ScreenshotViewer view = new ScreenshotViewer(bufImg, "spray_"+ k);
+                            ScreenshotViewer view = new ScreenshotViewer(bufImg, "spray_" + k);
                             view.setImageScallingPercent(100);
                             view.setVisible(true);
                             break;

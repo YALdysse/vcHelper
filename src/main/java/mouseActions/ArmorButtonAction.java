@@ -17,6 +17,7 @@
 
 package mouseActions;
 
+import mainPackage.ButtonExtended;
 import mainPackage.DebugTools;
 import mainPackage.ScreenshotViewer;
 import mainPackage.main_gui;
@@ -30,10 +31,12 @@ import java.io.IOException;
 public class ArmorButtonAction extends MouseAdapter
 {
     private double[][] armorData;
+    private main_gui gui_obj;
 
-    public ArmorButtonAction(double[][] aArmorData)
+    public ArmorButtonAction(double[][] aArmorData, main_gui aGui_obj)
     {
         armorData = aArmorData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -42,6 +45,36 @@ public class ArmorButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] ArmBut = gui_obj.getArmorButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < ArmBut.length; k++)
+            {
+                if (ArmBut[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getArmor_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getArmor_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getArmor_JCheckBox().setSelected(false);
+                gui_obj.getShowArmor_JMenuItem().setSelected(false);
+                gui_obj.getArmor_JCheckBox().setText(tmpStr.substring(0,startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {
@@ -56,7 +89,7 @@ public class ArmorButtonAction extends MouseAdapter
                     {
                         try
                         {
-                            BufferedImage bufImg = ImageIO.read(main_gui.mainGui_ClassLoader.getResource("Images/Screenshots/Armor/armor_" + k + ".png"));
+                            BufferedImage bufImg = ImageIO.read(main_gui.mainGui_ClassLoader.getResource("Images/Screenshots/Armor/armor_" + k + ".jpg"));
                             ScreenshotViewer view = new ScreenshotViewer(bufImg, "armor_" + k);
                             view.setImageScallingPercent(100);
                             view.setVisible(true);
@@ -64,7 +97,7 @@ public class ArmorButtonAction extends MouseAdapter
                         }
                         catch (IOException IOExc)
                         {
-                            DebugTools.printDebugMessage("Возникла ошибка при загрузке изображения брони: armor_" + k + ".png");
+                            DebugTools.printDebugMessage("Возникла ошибка при загрузке изображения брони: armor_" + k + ".jpg");
                             DebugTools.createLogFile(IOExc);
                         }
                         catch (IllegalArgumentException illegArgumExc)

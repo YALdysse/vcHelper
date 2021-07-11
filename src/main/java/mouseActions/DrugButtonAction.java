@@ -27,14 +27,17 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.charset.MalformedInputException;
 
 public class DrugButtonAction extends MouseAdapter
 {
     double[][] drugData;
+    private main_gui gui_obj;
 
-    public DrugButtonAction(double[][] aDrugData)
+    public DrugButtonAction(double[][] aDrugData, main_gui aGui_obj)
     {
         drugData = aDrugData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -43,6 +46,36 @@ public class DrugButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] drugButtons = gui_obj.getDrugButton();
+            int countVisible = 0;
+
+            for (int k = 0; k < drugButtons.length; k++)
+            {
+                if (drugButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getDrugs_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getDrugs_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getDrugs_JCheckBox().setSelected(false);
+                gui_obj.getShowDrugs_JMenuItem().setSelected(false);
+                gui_obj.getDrugs_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

@@ -32,10 +32,12 @@ import java.io.IOException;
 public class MedkitButtonAction extends MouseAdapter
 {
     private double[][] medkitData;
+    private main_gui gui_obj;
 
-    public MedkitButtonAction(final double[][] aMedkitData)
+    public MedkitButtonAction(final double[][] aMedkitData, main_gui aGui_obj)
     {
         medkitData = aMedkitData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -44,6 +46,36 @@ public class MedkitButtonAction extends MouseAdapter
         {
             JButton tmp = (JButton) e.getSource();
             tmp.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] medkitButtons = gui_obj.getMedkitButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < medkitButtons.length; k++)
+            {
+                if (medkitButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getMedkit_jCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getMedkit_jCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getMedkit_jCheckBox().setSelected(false);
+                gui_obj.getShowMedkit_JMenuItem().setSelected(false);
+                gui_obj.getMedkit_jCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

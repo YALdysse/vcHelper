@@ -17,6 +17,7 @@
 
 package mouseActions;
 
+import mainPackage.ButtonExtended;
 import mainPackage.DebugTools;
 import mainPackage.ScreenshotViewer;
 import mainPackage.main_gui;
@@ -30,11 +31,13 @@ import java.io.IOException;
 
 public class BribeButtonAction extends MouseAdapter
 {
-    double[][] bribeData;
+    private double[][] bribeData;
+    private main_gui gui_obj;
 
-    public BribeButtonAction(double[][] aBribeData)
+    public BribeButtonAction(double[][] aBribeData, main_gui aGui_obj)
     {
         bribeData = aBribeData;
+        gui_obj = aGui_obj;
     }
 
     @Override
@@ -44,6 +47,36 @@ public class BribeButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] bribeButtons = gui_obj.getBribeButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < bribeButtons.length; k++)
+            {
+                if (bribeButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getBribes_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getBribes_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getBribes_JCheckBox().setSelected(false);
+                gui_obj.getShowBribes_JMenuItem().setSelected(false);
+                gui_obj.getBribes_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {
@@ -59,7 +92,7 @@ public class BribeButtonAction extends MouseAdapter
                         try
                         {
                             BufferedImage bufImg = ImageIO.read(main_gui.mainGui_ClassLoader.getResource("Images/Screenshots/Bribes/bribe_" + k + ".jpg"));
-                            ScreenshotViewer view = new ScreenshotViewer(bufImg, "bribe_" +k);
+                            ScreenshotViewer view = new ScreenshotViewer(bufImg, "bribe_" + k);
                             view.setImageScallingPercent(100);
                             view.setVisible(true);
                             break;

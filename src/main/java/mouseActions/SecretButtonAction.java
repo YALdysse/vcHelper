@@ -30,11 +30,13 @@ import java.io.IOException;
 
 public class SecretButtonAction extends MouseAdapter
 {
-    double[][] secretsData;
+    private double[][] secretsData;
+    private main_gui gui_obj;
 
-    public SecretButtonAction(double[][] aSecretsData)
+    public SecretButtonAction(double[][] aSecretsData, main_gui aGui_obj)
     {
         secretsData = aSecretsData;
+        gui_obj=aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -43,6 +45,36 @@ public class SecretButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] secretsButtons = gui_obj.getSecretsButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < secretsButtons.length; k++)
+            {
+                if (secretsButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getSecrets_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getSecrets_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getSecrets_JCheckBox().setSelected(false);
+                gui_obj.getShowSecrets_JMenuItem().setSelected(false);
+                gui_obj.getSecrets_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

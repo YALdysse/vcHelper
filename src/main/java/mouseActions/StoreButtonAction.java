@@ -30,10 +30,13 @@ import java.io.IOException;
 
 public class StoreButtonAction extends MouseAdapter
 {
-    double[][] storesData;
-    public StoreButtonAction(double[][] aStoresData)
+    private double[][] storesData;
+    private main_gui gui_obj;
+
+    public StoreButtonAction(double[][] aStoresData, main_gui aGui_obj)
     {
         storesData=aStoresData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -42,6 +45,36 @@ public class StoreButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton)e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] storeButtons = gui_obj.getStoreButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < storeButtons.length; k++)
+            {
+                if (storeButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getStores_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getStores_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getStores_JCheckBox().setSelected(false);
+                gui_obj.getShowStores_JMenuItem().setSelected(false);
+                gui_obj.getStores_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

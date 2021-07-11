@@ -30,11 +30,13 @@ import java.io.IOException;
 
 public class RampageButtonAction extends MouseAdapter
 {
-    double[][] rampageData;
+    private double[][] rampageData;
+    private main_gui gui_obj;
 
-    public RampageButtonAction(double[][] aRampageData)
+    public RampageButtonAction(final double[][] aRampageData, main_gui aGui_obj)
     {
         rampageData = aRampageData;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -43,6 +45,36 @@ public class RampageButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            JButton[] rampageButtons = gui_obj.getRampegeButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < rampageButtons.length; k++)
+            {
+                if (rampageButtons[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getRampages_JCheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getRampages_JCheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getRampages_JCheckBox().setSelected(false);
+                gui_obj.getShowRampages_JMenuItem().setSelected(false);
+                gui_obj.getRampages_JCheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

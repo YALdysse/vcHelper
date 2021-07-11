@@ -31,11 +31,13 @@ public class VehicleButtonAction extends MouseAdapter
 {
     private double[][] vehiclesData;
     private ClassLoader classLoad;
+    private main_gui gui_obj;
 
-    public VehicleButtonAction(final double[][] aVehiclesData, ClassLoader cl)
+    public VehicleButtonAction(final double[][] aVehiclesData, ClassLoader cl, main_gui aGui_obj)
     {
         vehiclesData = aVehiclesData;
         classLoad = cl;
+        gui_obj = aGui_obj;
     }
 
     public void mouseClicked(MouseEvent e)
@@ -44,6 +46,36 @@ public class VehicleButtonAction extends MouseAdapter
         {
             JButton tmpButton = (JButton) e.getSource();
             tmpButton.setVisible(false);
+
+            //Подсчитываем кол-во отмеченных
+            ButtonExtended[] vehBut = gui_obj.getVehicleButtons();
+            int countVisible = 0;
+
+            for (int k = 0; k < vehBut.length; k++)
+            {
+                if (vehBut[k].isVisible())
+                {
+                    countVisible++;
+                }
+            }
+
+            String tmpStr = gui_obj.getVehicle_CheckBox().getText();
+            int startIndex = tmpStr.indexOf(" (");
+            int endIndex = tmpStr.indexOf(")");
+
+            if (startIndex == -1)
+            {
+                startIndex = tmpStr.length();
+            }
+
+            gui_obj.getVehicle_CheckBox().setText(tmpStr.substring(0, startIndex) + " (" + countVisible + ")");
+
+            if (countVisible == 0)
+            {
+                gui_obj.getVehicle_CheckBox().setSelected(false);
+                gui_obj.getShowVehicles_JMenuItem().setSelected(false);
+                gui_obj.getVehicle_CheckBox().setText(tmpStr.substring(0, startIndex));
+            }
         }
         if (e.getButton() == MouseEvent.BUTTON1)
         {

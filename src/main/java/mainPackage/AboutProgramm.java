@@ -155,6 +155,7 @@ public class AboutProgramm extends javax.swing.JFrame
         jTextPane1.setEditable(false);
         jTextPane1.setText("Выражаю благодарность:\n\t* Веб-сайту [ http://en.wikigta.org/ ] за предоставленные материалы\n\t* Веб-сайту [ http://selmiak.bplaced.net/ ] за предоставленные материалы\n\t* Веб-сайту [ https://gta.com.ua/ ] за предоставленные материалы\n\t* Веб-сайту [ https://www.flaticon.com/ ] за иконки\n\t* Веб-сайту [ https://gta.ag.ru/ ] за информацию об видеоигре" +
                 "\n\t* @joyo2 за карту Вайс-сити\n\t* @Huggito Baggio за подробную карту Вайс-сити\n\t* Веб-сайту [ https://rockstargame.su/ ] за информацию об игре\n\t* Веб-сайту [ https://games.mail.ru/ ] за материалы об игре\n\t * Веб-сайту [ https://gamesisart.ru/ ] за статью о прохождении миссий"
+                + "\n\t* Артёму Литвинову за помощь в организации базы данных"
                 + "\n\nВнимание: Наработки, которые использовались в проекте пренадлежат авторам этих наработок (см. выше)!");
         jTextPane1.setFont(descriptionFont.deriveFont(Font.PLAIN, 15.0f));
 
