@@ -1,6 +1,6 @@
-# vcHelper
+# Vice City Helper (Интерактивная карта Vice City)
 
-Vice City Helper (Map of Vice City)
+## Описание
 
 Не можете найти все скрытые пакеты в Grand Theft Auto: Vice City ? Не знаете где находится очередной уникальный прыжок ? — С помощью нашей программы Вы сможете узнать расположение скрытых пакетов, уникальный прыжков и прочего, тем самым пройти Grand Theft Auto: Vice City на 100 %.
 
@@ -15,3 +15,10 @@ Vice City Helper (Map of Vice City)
 <a href="https://ibb.co/KbxXv9c"><img src="https://i.ibb.co/sb92YFp/2021-06-28-20-05-32.png" alt="2021-06-28-20-05-32" border="0"></a>
 
 Хотите пройти Vice City снова ? Может быть Вам еще не удавалось пройти ее на 100% ? С нашей программой Вы сможете совершить этот "подвиг".
+
+
+
+## Системные требования
+* Операционная система: GNU/Linux, MacOS, Windows
+* Минимальное разрешение экрана: 800x600
+* [Java Runtime Environment](https://www.oracle.com/java/technologies/javase-jre8-downloads.html) (только для 'universal' версии!)
