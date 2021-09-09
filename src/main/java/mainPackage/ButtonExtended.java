@@ -25,16 +25,19 @@ import java.util.ArrayList;
 
 public class ButtonExtended extends JButton
 {
-    //private ToolTipExtended tooltp;
     private JToolTip tooltp;
-    private Font fontForToolTip;
-    private toolTipFrame toolTipFrameForButtonExtended;
+    private static Font fontForToolTip;
+    private static toolTipFrame toolTipFrameForButtonExtended;
     private String messageToToolTip = "";
-    private boolean showToolTip = false;
     private ButtonExtended thisButtonObject = this;
 
     static private Color backgroundToolTip_Color = new Color(238, 210, 181);
     static private Color foregroundToolTip_Color = new Color(76, 40, 22);
+
+    static
+    {
+        toolTipFrameForButtonExtended = new toolTipFrame("");
+    }
 
     @Override
     public JToolTip createToolTip()
@@ -64,7 +67,6 @@ public class ButtonExtended extends JButton
     public ButtonExtended()
     {
         super();
-        toolTipFrameForButtonExtended = new toolTipFrame("");
 
         this.addMouseListener(new MouseAdapter()
         {
@@ -77,14 +79,12 @@ public class ButtonExtended extends JButton
             @Override
             public void mouseEntered(MouseEvent e)
             {
-                showToolTip = true;
                 //Если курсор находится в пределах кнопки - отображать мою подсказку
-                if (showToolTip && toolTipFrameForButtonExtended.isNotNullToolTip())
+                if (toolTipFrameForButtonExtended.isNotNullToolTip())
                 {
-                    toolTipFrameForButtonExtended.setToolTipFrameText(messageToToolTip);
+                    toolTipFrameForButtonExtended.setToolTipFrameTextAndShow(messageToToolTip);
                     toolTipFrameForButtonExtended.setLocation((int) getLocationOnScreen().getX() + 20, (int) getLocationOnScreen().getY() + 30);
-
-                    toolTipFrameForButtonExtended.setVisible(true);
+                    //toolTipFrameForButtonExtended.setVisible(true);
                 }
             }
         });
@@ -94,7 +94,6 @@ public class ButtonExtended extends JButton
     {
         messageToToolTip = aMessage;
         toolTipFrameForButtonExtended.setToolTipFrameText(messageToToolTip);
-        //showToolTip = true;
     }
 
     public JToolTip getToolTip()
@@ -102,7 +101,7 @@ public class ButtonExtended extends JButton
         return tooltp;
     }
 
-    public void setFontForToolTip(final Font aFont)
+    public void setFontForExtendedToolTip(final Font aFont)
     {
         fontForToolTip = aFont;
 
@@ -117,11 +116,13 @@ public class ButtonExtended extends JButton
         toolTipFrameForButtonExtended.setVisible(false);
     }
 
-    class toolTipFrame extends JWindow
+    static class toolTipFrame extends JWindow
     {
         //private String message = "";
         private JTextArea messageArea;
         private int countLines = -1;
+        private final int BORDER_OFFSET = 3;
+        private final int BORDER_THICKNESS = 5;
 
         public toolTipFrame(final String aMessage)
         {
@@ -131,6 +132,7 @@ public class ButtonExtended extends JButton
             //this.setLocationRelativeTo(thisButtonObject);
             setLocation(0, 0);
             //setLayout(null);
+
 
             messageArea = new JTextArea(aMessage);
             messageArea.setLineWrap(true);
@@ -143,8 +145,8 @@ public class ButtonExtended extends JButton
             messageArea.setBackground(new Color(238, 210, 181));
             messageArea.setForeground(new Color(76, 40, 22));
 
-            messageArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(145, 30, 66), 4),
-                    BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+            messageArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(145, 30, 66), 5),
+                    BorderFactory.createEmptyBorder(BORDER_OFFSET, BORDER_OFFSET, BORDER_OFFSET, BORDER_OFFSET)));
 
             DebugTools.printDebugMessage("Количество строк в toolTipFrame: " + countLines);
 
@@ -159,42 +161,6 @@ public class ButtonExtended extends JButton
 
         private void setOptimalSize()
         {
-//            int countLines = getCountSeparator(messageArea.getText());
-//            int tmpWidth = this.getWidth();
-//            int tmpHeight = 28;
-//
-//
-//            if (countLines == 0)
-//            {
-//                tmpWidth = (int) ((double) message.length() * 7.65);//
-//
-//                //если длина надписи превышает 30% ширины экрана - будем переносить
-//                if (tmpWidth > Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.3)
-//                {
-//                    //Опеределяем вo сколько раз длина надписи превышает предел длины одной строки в подсказке
-//                    double koef = tmpWidth / (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.3);
-//
-//                    tmpWidth = (int) ((double) Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.3);
-//
-//                    //Добавляем нужное кол-во строк
-//                    countLines += (int) koef;
-//                }
-//            } else//на тот случай, когда разрыв строки указан явно, то подстаиваем под строку с наибольшей длиной
-//            {
-//                String maxLength_str = getMostLenghtLine(messageArea.getText());
-//                FontMetrics tmp_fm = messageArea.getFontMetrics(messageArea.getFont());
-//                tmpWidth = 0;
-//                for (int k = 0; k < maxLength_str.length(); k++)
-//                {
-//                    tmpWidth += maxLength_str.charAt(k);
-//                }
-//                //tmpWidth = (int) ((double) getMostLenghtLine(messageArea.getText()));
-//            }
-
-            //Суть формулы: умножаем высоту одной строки на количество строк. От полученного значения отнимаем количество строк умноженное на коеффициент
-            //getCountSeparator(messageArea.getText())
-
-
             int tmpWidth = 0;
             //Если ли в сообщении явно указанные разделители строк
             int countLines = getCountSeparator(messageArea.getText());
@@ -202,46 +168,72 @@ public class ButtonExtended extends JButton
             if (countLines == 0)
             {
                 int maxWidthLine = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.3);
+                DebugTools.printDebugMessage("Максимальна ширина одной строки: " + maxWidthLine);
 
                 if (YALtools.getTextWidth(messageArea.getText(), messageArea.getFont(), messageArea) > maxWidthLine)
                 {//разбиваем на части
                     ArrayList<String> textWithLineSeparators = YALtools.SplitToLines(messageArea.getText(), maxWidthLine, messageArea.getFont(), messageArea);
                     DebugTools.printDebugMessage("Кол-во разделенных строк: " + textWithLineSeparators.size());
-                    String lineWithMaxLenght_str = YALtools.getMostLengthString(textWithLineSeparators);
+                    String lineWithMaxLenght_str = YALtools.getMostWidthString(textWithLineSeparators, messageArea.getFont(), messageArea);
 
                     tmpWidth = (int) YALtools.getTextWidth(lineWithMaxLenght_str, messageArea.getFont(), messageArea);
                     DebugTools.printDebugMessage("Ширина наибольшей строки: " + tmpWidth);
 
                     countLines = textWithLineSeparators.size();
+                    //tmpWidth -= 20;
+                    //messageArea.setRows(countLines);
                 } else
                 {//Значит можно отобразить одной строкой
                     tmpWidth = (int) YALtools.getTextWidth(messageArea.getText(), messageArea.getFont(), messageArea);
-
+                    DebugTools.printDebugMessage("Отображение одной срокой");
                 }
             } else //
             {
 
             }
 
-            int tmpHeight = 28;
+            //учитываем Border
+            tmpWidth += (BORDER_OFFSET * 4) + BORDER_THICKNESS;
 
-            //tmpHeight = (tmpHeight * (countLines + 1)) - (int) (((countLines * 8.8)) - ((tmpHeight / (countLines + 1)) / 10));
-            tmpHeight = messageArea.getFont().getSize() * (countLines + 2);
+
+            int tmpHeight = 0;
+
+            //----------- Правильная высота
+            int maxWidthLine = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() * 0.3);
+            ArrayList<String> textWithLineSeparators = YALtools.SplitToLines(messageArea.getText(), maxWidthLine, messageArea.getFont(), messageArea);
+
+            FontMetrics fm = null;
+            if (messageArea != null && messageArea.getFont() != null)
+            {
+                fm = messageArea.getFontMetrics(messageArea.getFont());
+                for (String mtpStr : textWithLineSeparators)
+                {
+                    tmpHeight += fm.getStringBounds(mtpStr, messageArea.getGraphics()).getHeight();
+                }
+                tmpHeight += (BORDER_OFFSET * 3) + BORDER_THICKNESS;
+            }
+            //===========
 
             DebugTools.printDebugMessage("Используэтся переносов: " + getCountSeparator(messageArea.getText()));
             DebugTools.printDebugMessage("Количество строк в подсказке: " + countLines
-                    + "Высота подсказки: " + tmpHeight);
+                    + "Высота подсказки: " + (tmpHeight + 5));
 
-
-            setSize(tmpWidth, tmpHeight);
+            //tmpWidth+=20;
+            DebugTools.printDebugMessage("tmpWidth: " + tmpWidth);
+            setSize(tmpWidth, tmpHeight + 5);
             //messageArea.repaint();
         }
 
         public void setToolTipFrameText(final String aMessage)
         {
             messageArea.setText(aMessage);
+        }
+
+        public void setToolTipFrameTextAndShow(final String aMessage)
+        {
+            messageArea.setText(aMessage);
             setOptimalSize();
-            //this.setVisible(true);
+            setVisible(true);
         }
 
         private int getCountSeparator(final String aInputStr)

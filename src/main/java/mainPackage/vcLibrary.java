@@ -28,7 +28,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -53,7 +52,6 @@ public class vcLibrary extends javax.swing.JFrame
         try
         {
             dbReader = new SQLiteDBReader(DebugTools.getJarLocation().getParent() + "/vcLibrary_Russian.sqlite");
-            //java.sql.
         }
         catch (SQLException sqlExc)
         {
@@ -86,6 +84,7 @@ public class vcLibrary extends javax.swing.JFrame
     private void initComponents()
     {
         main_JPanel = new javax.swing.JPanel();
+        //main_JPanel.setBackground(new Color(231, 246, 198));
         description_jScrollPane = new javax.swing.JScrollPane();
         description_jTextPane = new javax.swing.JTextPane();
         titleOfArticle_jLabel = new ControlledLabel();
@@ -94,7 +93,8 @@ public class vcLibrary extends javax.swing.JFrame
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Библиотека Vice City");
-        setMinimumSize(new Dimension(600, 450));
+        setMinimumSize(new Dimension(650, 450));
+        getContentPane().setBackground(new Color(180, 88, 63));
 
 
         titleOfArticle_jLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -120,9 +120,8 @@ public class vcLibrary extends javax.swing.JFrame
 
         description_jTextPane.setEditable(false);
         description_jTextPane.setFont(descriptionFont.deriveFont(Font.PLAIN, 14.0f));
-        description_jTextPane.setBackground(new Color(238, 238, 238));
+        description_jTextPane.setBackground(new Color(220, 211, 198, 255));
         description_jTextPane.setForeground(Color.BLACK);
-
         description_jScrollPane.setViewportView(description_jTextPane);
 
         //image_psevdoImageBox.setText("ImageOfArticle");
@@ -153,6 +152,7 @@ public class vcLibrary extends javax.swing.JFrame
         library_jTree.setVisible(true);
         library_jScrollPane.setViewportView(library_jTree);
         // library_jTree.setBackground(new Color(238, 238, 238));
+        library_jTree.setCellRenderer(new CellRendererWithImage());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,7 +194,6 @@ public class vcLibrary extends javax.swing.JFrame
                 try
                 {
                     dbReader.closeConnection();
-
                 }
                 catch (SQLException sqlException)
                 {
@@ -681,6 +680,41 @@ public class vcLibrary extends javax.swing.JFrame
                         break;
                     }
 
+                    //Баги
+                    if (dbReader.getResultSet().getInt("category_id") == 7)
+                    {
+                        //Получаем название
+                        DebugTools.printDebugMessage("Выбранная : " + currentNodeName_str);
+                        //получаем данные
+                        dbReader.executeQuery("SELECT Bugs.bug_id, Bugs.bug_name, Bugs.bug_description, Bugs.bug_imageName, Categories.category_id, Categories.category_name, Categories.category_description\n" +
+                                "FROM join_Bugs_Categories\n" +
+                                "JOIN Bugs ON join_Bugs_Categories.bug_id=Bugs.bug_id\n" +
+                                "JOIN Categories ON join_Bugs_Categories.category_id=Categories.category_id\n" +
+                                "WHERE Bugs.bug_name LIKE '%" + currentNodeName_str + "%'");
+                        titleOfArticle_jLabel.setText(dbReader.getResultSet().getString("bug_name"));
+
+                        try
+                        {
+                            BufferedImage weaponIcon = ImageIO.read(this.getClass().getClassLoader().getResource("Images/Bugs/" + dbReader.getResultSet().getString("bug_imageName")));
+                            image_psevdoImageBox.addImage(weaponIcon);
+                            image_psevdoImageBox.setImageFitStyle(psevdoImageBox.FIT_IMAGE_TO_COMPONENT, true);
+//                            image_psevdoImageBox.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(new Color(126, 153, 170), 6),
+//                                    BorderFactory.createEmptyBorder(2, 2, 2, 2)));
+                        }
+                        catch (IOException ioExc)
+                        {
+                            loadNoImage();
+                        }
+                        catch (IllegalArgumentException iArgExc)
+                        {
+                            loadNoImage();
+                        }
+
+                        description_jTextPane.setText(dbReader.getResultSet().getString("bug_description"));
+                        description_jTextPane.setVisible(true);
+                        break;
+                    }
+
 
                     description_jTextPane.setVisible(true);
                     break;
@@ -794,10 +828,10 @@ public class vcLibrary extends javax.swing.JFrame
         //Color backgroud_Color = new Color(255, 255, 255);//Цвет фона
         //Color foreground_Color = new Color(0, 0, 0);//Цвет основного текста
         Color parametrsName_Color = new Color(107, 8, 72);//Цвет имен параметров характеристик
-        Color values_Color = new Color(41, 121, 178);//Цвет значений характеристик
+        Color values_Color = new Color(33, 119, 175);//Цвет значений характеристик
 
         SimpleAttributeSet baseline = new SimpleAttributeSet();
-        StyleConstants.setForeground(baseline, new Color(255, 22, 93));
+        StyleConstants.setForeground(baseline, new Color(227, 20, 82));
         StyleConstants.setFontSize(baseline, description_jTextPane.getFont().getSize() + 2);
         description_jTextPane.getStyledDocument().setCharacterAttributes(description_jTextPane.getText().indexOf("Характеристики:"), "Характеристики:".length(), baseline, true);
 
@@ -893,12 +927,14 @@ public class vcLibrary extends javax.swing.JFrame
             ResultSet tmpRS = dbReader.getResultSet();
             library_treeModel.insertNodeInto(new DefaultMutableTreeNode(tmpRS.getString("category_name")), library_treeNode, library_treeModel.getChildCount(library_treeNode));
 
+
             String tmpNameSurname = "";
             DefaultMutableTreeNode tmpNode = (DefaultMutableTreeNode) library_treeModel.getChild(library_treeNode, library_treeModel.getChildCount(library_treeNode) - 1);
             while (tmpRS.next())
             {
                 tmpNameSurname = tmpRS.getString("character_name") + " " + tmpRS.getString("character_surname");
-                library_treeModel.insertNodeInto(new DefaultMutableTreeNode(tmpNameSurname), tmpNode, tmpNode.getChildCount());
+                DefaultMutableTreeNode tmpCharacterNode = new DefaultMutableTreeNode(tmpNameSurname);
+                library_treeModel.insertNodeInto(tmpCharacterNode, tmpNode, tmpNode.getChildCount());
             }
 
             //добавляем банды
@@ -1153,6 +1189,30 @@ public class vcLibrary extends javax.swing.JFrame
             DebugTools.createLogFile(sqlExc);
         }
 
+        //добавляем Баги
+        try
+        {
+            dbReader.executeQuery("SELECT Bugs.bug_id, Bugs.bug_name, Bugs.bug_description, Bugs.bug_imageName, Categories.category_id, Categories.category_name, Categories.category_description\n" +
+                    "FROM join_Bugs_Categories\n" +
+                    "JOIN Bugs ON join_Bugs_Categories.bug_id=Bugs.bug_id\n" +
+                    "JOIN Categories ON join_Bugs_Categories.category_id=Categories.category_id ");
+
+            ResultSet tmpRS = dbReader.getResultSet();
+            library_treeModel.insertNodeInto(new DefaultMutableTreeNode(tmpRS.getString("category_name")), library_treeNode, library_treeModel.getChildCount(library_treeNode));
+
+            String tmpNameSurname = "";
+            DefaultMutableTreeNode tmpNode = (DefaultMutableTreeNode) library_treeModel.getChild(library_treeNode, library_treeModel.getChildCount(library_treeNode) - 1);
+            while (tmpRS.next())
+            {
+                library_treeModel.insertNodeInto(new DefaultMutableTreeNode(tmpRS.getString("bug_name")), tmpNode, tmpNode.getChildCount());
+            }
+        }
+        catch (SQLException sqlExc)
+        {
+            DebugTools.printDebugMessage("Ошибка выполнения запроса к БД при считывании свдений об игре");
+            DebugTools.createLogFile(sqlExc);
+        }
+
     }
 
 
@@ -1230,6 +1290,123 @@ public class vcLibrary extends javax.swing.JFrame
         catch (IOException ioExc2)
         {
 
+        }
+    }
+
+    class CellRendererWithImage extends DefaultTreeCellRenderer
+    {
+        private ImageIcon characterNode_ImageIcon;
+        private ImageIcon vehiclesNode_ImageIcon;
+        private ImageIcon sportCarNode_ImageIcon;
+        private ImageIcon crossoverVehicleNode_ImageIcon;
+
+        public CellRendererWithImage()
+        {
+            characterNode_ImageIcon = null;
+//
+//            try
+//            {
+//                //dbReader.executeQuery("");
+//                //dbReader.getResultSet();
+////                Image charactersLeaf_Image = ImageIO.read(this.getClass().getClassLoader().getResource("Images/NodeIcons/CharactersNodeIcon_1.png"));
+////                Image VehiclesLeaf_Image = ImageIO.read(this.getClass().getClassLoader().getResource("Images/NodeIcons/VehiclesNodeIcon.png"));
+////                Image sportCarLeaf_Image = ImageIO.read(this.getClass().getClassLoader().getResource("Images/NodeIcons/SportCarsNodeIcon.png"));
+////                Image crossoverVehicleLeaf_Image = ImageIO.read(this.getClass().getClassLoader().getResource("Images/NodeIcons/CrossoverNodeIcon.png"));
+////
+////
+////                characterNode_ImageIcon = new ImageIcon(charactersLeaf_Image);
+////                vehiclesNode_ImageIcon = new ImageIcon(VehiclesLeaf_Image);
+////                sportCarNode_ImageIcon = new ImageIcon(sportCarLeaf_Image);
+////                crossoverVehicleNode_ImageIcon = new ImageIcon(crossoverVehicleLeaf_Image);
+//            }
+//            catch (IOException ioExc)
+//            {
+//                DebugTools.printDebugMessage("Ошибка загрузки иконки узла Персонажей.");
+//            }
+        }
+
+        @Override
+        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus)
+        {
+            super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
+            DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
+
+//            if (parent != null)
+//            {
+//                if (parent.getUserObject().toString().equals("Персонажи"))
+//                {
+//                    setIcon(characterNode_ImageIcon);
+//                }
+//                if (parent.getUserObject().toString().equals("Транспорт"))
+//                {
+//                    //setIcon(vehiclesNode_ImageIcon);
+//                }
+//                if (parent.getUserObject().toString().equals("Спортивные") ||
+//                        node.getUserObject().toString().equals("Спортивные"))
+//                {
+//                    setIcon(sportCarNode_ImageIcon);
+//                }
+//                if (parent.getUserObject().toString().equals("Внедорожники") ||
+//                        node.getUserObject().toString().equals("Внедорожники"))
+//                {
+//                    setIcon(crossoverVehicleNode_ImageIcon);
+//                }
+//            }
+            //-------------------------- Иконки для основных категорий
+            StringBuilder query_StrBuiler = new StringBuilder("SELECT *\nFROM Categories");
+
+            try
+            {
+                dbReader.executeQuery(query_StrBuiler.toString());
+                String tmpNodeTitle = "", nodeIcon_str = "";
+
+                do
+                {
+                    tmpNodeTitle = dbReader.getResultSet().getString("category_name");
+                    nodeIcon_str = dbReader.getResultSet().getString("category_nodeIcon");
+                    DebugTools.printDebugMessage("Текущий узел для загрузки иконки: " + node.getUserObject().toString());
+
+                    if (node.getUserObject().toString().equals(tmpNodeTitle))
+                    {
+                        Image currentNodeIcon = ImageIO.read(this.getClass().getClassLoader().getResource("Images/" + nodeIcon_str));
+                        setIcon(new ImageIcon(currentNodeIcon));
+                        break;
+                    }
+                }
+                while (dbReader.getResultSet().next());
+
+                //----------------- character
+                query_StrBuiler.delete(0, query_StrBuiler.capacity());
+                query_StrBuiler.append("SELECT *\nFROM Characters");
+
+                do
+                {
+                    tmpNodeTitle = dbReader.getResultSet().getString("character_name");
+                    nodeIcon_str = dbReader.getResultSet().getString("character_image_name");
+                    DebugTools.printDebugMessage("Текущий узел для загрузки иконки: " + node.getUserObject().toString());
+
+                    if (node.getUserObject().toString().equals(tmpNodeTitle))
+                    {
+                        Image currentNodeIcon = ImageIO.read(this.getClass().getClassLoader().getResource("Images/Characters/" + nodeIcon_str));
+                        setIcon(new ImageIcon(currentNodeIcon));
+                        break;
+                    }
+                }
+                while (dbReader.getResultSet().next());
+                //===========================
+
+            }
+            catch (SQLException sqlExc)
+            {
+
+            }
+            catch (IOException ioExc)
+            {
+                DebugTools.printDebugMessage("Возникла ошибка ввода-вывода при загрузке иконки узла. " + ioExc.toString());
+            }
+
+            return this;
         }
     }
 }

@@ -53,7 +53,6 @@ import javax.swing.*;
  *
  * @author Y@Ldysse
  */
-//public class main_gui extends javax.swing.JFrame
 public class main_gui extends JFrame
 {
     private static main_gui thisObject;
@@ -68,7 +67,7 @@ public class main_gui extends JFrame
     private Font casualContactMF = null;
     private Font toolTipDescription = null;
     private final Color viceCityFontColor = new Color(251, 80, 226);
-    private final Color TRANSPARENCY = new Color(0, 0, 0, 0);
+    public static final Color TRANSPARENCY = new Color(50, 50, 50, 0);
     private final Color LEGEND_Color = new Color(225, 223, 197);
 
     private final float sizeRageItalic = 36f;
@@ -317,6 +316,54 @@ public class main_gui extends JFrame
     private String clothes_10_Havana = "";
     private String clothes_11_Frankie = "";
 
+    private String armor_0_str = "Upstairs over the parking lot where a Banshee and a PCJ-600 spawn of the building North of Pay 'n' Spray.";
+    private String armor_1_str = "Northeast behind the landmark tall pink condo building East of Hotel Harrison, by the pool. A Hidden Package pickup appears once and a Micro SMG, which spawns, are nearby.";
+    private String armor_2_str = "East, behind the sign in front of the Standing Vice Point building.";
+    private String armor_3_str = "At the North-East corner of the building destroyed in the 'Demolition Man' mission.";
+    private String armor_4_str = "North-West in the grassy lot behind the wooden fence South of San Felis Hotel, East across the street from InterGlobal Studios.";
+    private String armor_5_str = "North-West corner up the stairs of the building South of '3321 Vice Point'.";
+    private String armor_6_str = "Top of the second ramp in the East entrance of the building South of the bridge which leads to Prawn Island.";
+    private String armor_7_str = "In a 'tiki' garden pool bar South of 'El Swanko Casa'.";
+    private String armor_8_str = "In a sand bunker at the North-West part of the course.";
+    private String armor_9_str = "Near the basketball courts behind some apartments facing East The Well Stacked Pizza.";
+    private String armor_10_str = "Behind a building beside the 'The Greasy Chopper'.";
+    private String armor_11_str = "In a alley at south of 'The Well Stacked Pizza'.";
+    private String armor_12_str = "On roof of a building near the test track at the north of the district (use the stairs behind).";
+    private String armor_13_str = "At top of the east entrance guard tower.";
+    private String armor_14_str = "On roof of Print Works (use stairs).";
+    private String armor_15_str = "Between some crates in the parking lot beside Vice City Transport Police (east of Escobar International Airport).";
+    private String armor_16_str = "In the entrance of a building North across the street from the big ship.";
+    private String armor_17_str = "In the corner of a blue house just west of the basketball court complex (behind some bushes).";
+    private String armor_18_str = "In the lounge North of the main hall central staircase (after 'Keep Your Friends Close...').";
+    private String armor_19_str = "In a small room at bottom of the stairs.";
+
+    private String medkit_0_str = "Near Ocean View Hospital.";
+    private String medkit_1_str = "In the curved walkway at the north side of Ocean Bay Marina building.";
+    private String medkit_2_str = "On the roof of 'Wok & Roll', just northeast of the Police Station.";
+    private String medkit_3_str = "On the bridge in the golf course.";
+    private String medkit_4_str = "Between a dumpster and Vice City 'Inside Track' building, just northeast of Pay 'N' Spray.";
+    private String medkit_5_str = "Behind the fountain in front of the north mansion.";
+    private String medkit_6_str = "Inside the Sprunk stand that is in the shape of a giant cup next to the parked Infernus.";
+    private String medkit_7_str = "In front of Shady Palms Hospital.";
+    private String medkit_8_str = "Inside the Dispensary, near an Adrenaline Pill.";
+    private String medkit_9_str = "On roof of Ammu-Nation.";
+    private String medkit_10_str = "At the entrance of Schuman Health Care Center.";
+    private String medkit_11_str = "On the roof above the other Health pickup.";
+    private String medkit_12_str = "In the middle of the test tracks.";
+    private String medkit_13_str = "Inside the Dispensary, along with an Adrenaline Pill.";
+    private String medkit_14_str = "Inside the Vice City Junkyard, on top of the central conveyor belt of the southernmost processor.";
+    private String medkit_15_str = "By the stairs on the left of Haitian Drug Factory entrance.";
+    private String medkit_16_str = "On top level inside the terminal.";
+    private String medkit_17_str = "Under the first gangplank of the ship at the port gate.";
+    private String medkit_18_str = "At South-East, downstairs, in the Boatyard.";
+    private String medkit_19_str = "In a waiting room beside the large central stairs of the main hall.";
+    private String medkit_20_str = "On the sidewalk at the west side entrance.";
+    private String medkit_21_str = "Inside Ryton Aide, beside Pay 'n' Spray. An Adrenaline pill is nearby.";
+    private String medkit_22_str = "At entrance West Haven Community Healthcare Centre.";
+    private String medkit_23_str = "On roof of a white building just west of Calley Delicatessen Restaurant.";
+    private String medkit_24_str = "In the small room at bottom of the stairs, along with several weapons.";
+
+
     private String saveMap_str = "Save the Map";
 
     private String howToWorkWithMap_str = "Press LMB to delete pickup or RMB to show screenshot.";
@@ -381,7 +428,7 @@ public class main_gui extends JFrame
         setPreferredSize(new Dimension(frameWidth, frameHeight));
         setSize(frameWidth, frameHeight);
         setResizable(false);
-        setTitle("Vice City Helper [build 95 Beta]");
+        setTitle("Vice City Helper [build 96 Beta]");
         try
         {
             BufferedImage frameIcon = ImageIO.read(mainGui_ClassLoader.getResource("Images/icon.png"));
@@ -468,6 +515,12 @@ public class main_gui extends JFrame
         southWestPart_JButton.setBackground(new Color(148, 199, 246));
         northEastPart_JButton.setBackground(new Color(148, 199, 246));
         southEastPart_JButton.setBackground(new Color(148, 199, 246));
+
+        //for MacOS
+        northWestPart_JButton.setOpaque(true);
+        southWestPart_JButton.setOpaque(true);
+        northEastPart_JButton.setOpaque(true);
+        southEastPart_JButton.setOpaque(true);
 
         northWestPart_JButton.setIcon(new ImageIcon(northWestMapPartMini));
         southWestPart_JButton.setIcon(new ImageIcon(southWestMapPartMini));
@@ -1978,6 +2031,53 @@ public class main_gui extends JFrame
             uniqueJump_34 = localPref.get("UniqueJump_34", "");
             uniqueJump_35 = localPref.get("UniqueJump_35", "");
 
+            armor_0_str = localPref.get("armor_0_str", armor_0_str);
+            armor_1_str = localPref.get("armor_1_str", armor_1_str);
+            armor_2_str = localPref.get("armor_2_str", armor_2_str);
+            armor_3_str = localPref.get("armor_3_str", armor_3_str);
+            armor_4_str = localPref.get("armor_4_str", armor_4_str);
+            armor_5_str = localPref.get("armor_5_str", armor_5_str);
+            armor_6_str = localPref.get("armor_6_str", armor_6_str);
+            armor_7_str = localPref.get("armor_7_str", armor_7_str);
+            armor_8_str = localPref.get("armor_8_str", armor_8_str);
+            armor_9_str = localPref.get("armor_9_str", armor_9_str);
+            armor_10_str = localPref.get("armor_10_str", armor_10_str);
+            armor_11_str = localPref.get("armor_11_str", armor_11_str);
+            armor_12_str = localPref.get("armor_12_str", armor_12_str);
+            armor_13_str = localPref.get("armor_13_str", armor_13_str);
+            armor_14_str = localPref.get("armor_14_str", armor_14_str);
+            armor_15_str = localPref.get("armor_15_str", armor_15_str);
+            armor_16_str = localPref.get("armor_16_str", armor_16_str);
+            armor_17_str = localPref.get("armor_17_str", armor_17_str);
+            armor_18_str = localPref.get("armor_18_str", armor_18_str);
+            armor_19_str = localPref.get("armor_19_str", armor_19_str);
+
+            medkit_0_str = localPref.get("medkit_0_str", medkit_0_str);
+            medkit_1_str = localPref.get("medkit_1_str", medkit_1_str);
+            medkit_2_str = localPref.get("medkit_2_str", medkit_2_str);
+            medkit_3_str = localPref.get("medkit_3_str", medkit_3_str);
+            medkit_4_str = localPref.get("medkit_4_str", medkit_4_str);
+            medkit_5_str = localPref.get("medkit_5_str", medkit_5_str);
+            medkit_6_str = localPref.get("medkit_6_str", medkit_6_str);
+            medkit_7_str = localPref.get("medkit_7_str", medkit_7_str);
+            medkit_8_str = localPref.get("medkit_8_str", medkit_8_str);
+            medkit_9_str = localPref.get("medkit_9_str", medkit_9_str);
+            medkit_10_str = localPref.get("medkit_10_str", medkit_10_str);
+            medkit_11_str = localPref.get("medkit_11_str", medkit_11_str);
+            medkit_12_str = localPref.get("medkit_12_str", medkit_12_str);
+            medkit_13_str = localPref.get("medkit_13_str", medkit_13_str);
+            medkit_14_str = localPref.get("medkit_14_str", medkit_14_str);
+            medkit_15_str = localPref.get("medkit_15_str", medkit_15_str);
+            medkit_16_str = localPref.get("medkit_16_str", medkit_16_str);
+            medkit_17_str = localPref.get("medkit_17_str", medkit_17_str);
+            medkit_18_str = localPref.get("medkit_18_str", medkit_18_str);
+            medkit_19_str = localPref.get("medkit_19_str", medkit_19_str);
+            medkit_20_str = localPref.get("medkit_20_str", medkit_20_str);
+            medkit_21_str = localPref.get("medkit_21_str", medkit_21_str);
+            medkit_22_str = localPref.get("medkit_22_str", medkit_22_str);
+            medkit_23_str = localPref.get("medkit_23_str", medkit_23_str);
+            medkit_24_str = localPref.get("medkit_24_str", medkit_24_str);
+
             clothes_0_Street = localPref.get("Clothes_0_Street", "Street");
             clothes_1_Soiree = localPref.get("Clothes_1_Soiree", "Soiree");
             clothes_2_Coveralls = localPref.get("Clothes_2_Coveralls", "Coveralls");
@@ -2732,8 +2832,8 @@ public class main_gui extends JFrame
     private JButton[] sprayButton;
     private JButton[] drugButton;
     private JButton[] bribeButton;
-    private JButton[] armorButton;
-    private JButton[] medkitButton;
+    private ButtonExtended[] armorButton;
+    private ButtonExtended[] medkitButton;
     private ButtonExtended[] vehicleButton;
     private ButtonExtended[] uniqueJumpButton;
     private ButtonExtended[] propertiesButton;
@@ -2781,8 +2881,6 @@ public class main_gui extends JFrame
      *  2 - юго-запад, 3- севоро-восток, 4 - юго-восток)
      * */
 
-    private String[] weaponsNamesForWeaponsData;
-
     private void medkit_CheckBoxAction()
     {
         if (Medkit_jCheckBox.isSelected())
@@ -2813,7 +2911,7 @@ public class main_gui extends JFrame
             Medkit_jCheckBox.setText("[" + currentPartMedkitData.length + "] " + medkit_str);
 
 
-            medkitButton = new JButton[currentPartMedkitData.length];
+            medkitButton = new ButtonExtended[currentPartMedkitData.length];
             MedkitButtonAction medkitButAction = new MedkitButtonAction(medkitData, this);
 
             //=======
@@ -2822,16 +2920,169 @@ public class main_gui extends JFrame
             //=======
             for (int k = 0; k < medkitButton.length; k++)
             {
-                medkitButton[k] = new JButton("");
+                medkitButton[k] = new ButtonExtended();
                 medkitButton[k].setSize(18, 18);
-                medkitButton[k].setForeground(TRANSPARENCY);
+                //medkitButton[k].setForeground(TRANSPARENCY);
                 medkitButton[k].setBackground(TRANSPARENCY);
                 medkitButton[k].setBorder(null);
-                //tmpBut.setText("");
+                medkitButton[k].setOpaque(false);
                 medkitButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/medical-kit_1.png")));
                 medkitButton[k].setLocation((int) currentPartMedkitData[k][0], (int) currentPartMedkitData[k][1]);
                 medkitButton[k].addMouseListener(medkitButAction);
                 Map.add(medkitButton[k]);
+
+                medkitButton[k].setFontForExtendedToolTip(toolTipDescription);
+
+                if (medkitButton[k].getX() == medkitData[0][0]
+                        && medkitButton[k].getY() == medkitData[0][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_0_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[1][0]
+                        && medkitButton[k].getY() == medkitData[1][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_1_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[2][0]
+                        && medkitButton[k].getY() == medkitData[2][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_2_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[3][0]
+                        && medkitButton[k].getY() == medkitData[3][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_3_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[4][0]
+                        && medkitButton[k].getY() == medkitData[4][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_4_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[5][0]
+                        && medkitButton[k].getY() == medkitData[5][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_5_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[6][0]
+                        && medkitButton[k].getY() == medkitData[6][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_6_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[7][0]
+                        && medkitButton[k].getY() == medkitData[7][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_7_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[8][0]
+                        && medkitButton[k].getY() == medkitData[8][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_8_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[9][0]
+                        && medkitButton[k].getY() == medkitData[9][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_9_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[10][0]
+                        && medkitButton[k].getY() == medkitData[10][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_10_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[11][0]
+                        && medkitButton[k].getY() == medkitData[11][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_11_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[12][0]
+                        && medkitButton[k].getY() == medkitData[12][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_12_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[13][0]
+                        && medkitButton[k].getY() == medkitData[13][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_13_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[14][0]
+                        && medkitButton[k].getY() == medkitData[14][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_14_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[15][0]
+                        && medkitButton[k].getY() == medkitData[15][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_15_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[16][0]
+                        && medkitButton[k].getY() == medkitData[16][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_16_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[17][0]
+                        && medkitButton[k].getY() == medkitData[17][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_17_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[18][0]
+                        && medkitButton[k].getY() == medkitData[18][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_18_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[19][0]
+                        && medkitButton[k].getY() == medkitData[19][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_19_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[20][0]
+                        && medkitButton[k].getY() == medkitData[20][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_20_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[21][0]
+                        && medkitButton[k].getY() == medkitData[21][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_21_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[22][0]
+                        && medkitButton[k].getY() == medkitData[22][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_22_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[23][0]
+                        && medkitButton[k].getY() == medkitData[23][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_23_str);
+                    continue;
+                }
+                if (medkitButton[k].getX() == medkitData[24][0]
+                        && medkitButton[k].getY() == medkitData[24][1])
+                {
+                    medkitButton[k].setTextToExtendedToolTip(medkit_24_str);
+                    continue;
+                }
             }
             Map.repaint();
 
@@ -2876,20 +3127,141 @@ public class main_gui extends JFrame
             }
 
             Armor_JCheckBox.setText("[" + currentPartArmorData.length + "] " + armor_str);
-            armorButton = new JButton[currentPartArmorData.length];
+            armorButton = new ButtonExtended[currentPartArmorData.length];
             mouseActions.ArmorButtonAction armorButtonAction = new mouseActions.ArmorButtonAction(armorData, this);
             for (int k = 0; k < armorButton.length; k++)
             {
-                armorButton[k] = new JButton("");
+                armorButton[k] = new ButtonExtended();
                 armorButton[k].setSize(18, 18);
                 armorButton[k].setForeground(TRANSPARENCY);
                 armorButton[k].setBackground(TRANSPARENCY);
                 armorButton[k].setBorder(null);
-                //tmpBut.setText("");
                 armorButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/armor_1.png")));
                 armorButton[k].setLocation((int) currentPartArmorData[k][0], (int) currentPartArmorData[k][1]);
                 armorButton[k].addMouseListener(armorButtonAction);
+                armorButton[k].setFontForExtendedToolTip(toolTipDescription);
                 Map.add(armorButton[k]);
+
+                if (armorButton[k].getX() == armorData[0][0]
+                        && armorButton[k].getY() == armorData[0][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_0_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[1][0]
+                        && armorButton[k].getY() == armorData[1][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_1_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[2][0]
+                        && armorButton[k].getY() == armorData[2][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_2_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[3][0]
+                        && armorButton[k].getY() == armorData[3][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_3_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[4][0]
+                        && armorButton[k].getY() == armorData[4][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_4_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[5][0]
+                        && armorButton[k].getY() == armorData[5][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_5_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[6][0]
+                        && armorButton[k].getY() == armorData[6][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_6_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[7][0]
+                        && armorButton[k].getY() == armorData[7][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_7_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[8][0]
+                        && armorButton[k].getY() == armorData[8][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_8_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[9][0]
+                        && armorButton[k].getY() == armorData[9][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_9_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[10][0]
+                        && armorButton[k].getY() == armorData[10][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_10_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[11][0]
+                        && armorButton[k].getY() == armorData[11][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_11_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[12][0]
+                        && armorButton[k].getY() == armorData[12][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_12_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[13][0]
+                        && armorButton[k].getY() == armorData[13][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_13_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[14][0]
+                        && armorButton[k].getY() == armorData[14][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_14_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[15][0]
+                        && armorButton[k].getY() == armorData[15][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_15_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[16][0]
+                        && armorButton[k].getY() == armorData[16][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_16_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[17][0]
+                        && armorButton[k].getY() == armorData[17][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_17_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[18][0]
+                        && armorButton[k].getY() == armorData[18][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_18_str);
+                    continue;
+                }
+                if (armorButton[k].getX() == armorData[19][0]
+                        && armorButton[k].getY() == armorData[19][1])
+                {
+                    armorButton[k].setTextToExtendedToolTip(armor_19_str);
+                    continue;
+                }
             }
             Map.repaint();
         } else
@@ -2941,7 +3313,6 @@ public class main_gui extends JFrame
                 bribeButton[k].setForeground(TRANSPARENCY);
                 bribeButton[k].setBackground(new Color(0, 0, 0, 0));
                 bribeButton[k].setBorder(null);
-                //tmpBut.setText("");
                 bribeButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/bribe_2.png")));
                 bribeButton[k].setLocation((int) currentPartBribesData[k][0], (int) currentPartBribesData[k][1]);
                 bribeButton[k].addMouseListener(bribeButtonAction);
@@ -2998,7 +3369,6 @@ public class main_gui extends JFrame
                 drugButton[k].setForeground(TRANSPARENCY);
                 drugButton[k].setBackground(TRANSPARENCY);
                 drugButton[k].setBorder(null);
-                //tmpBut.setText("");
                 drugButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/drug_2.png")));
                 drugButton[k].setLocation((int) currentPartDrugsData[k][0], (int) currentPartDrugsData[k][1]);
                 drugButton[k].addMouseListener(drugButAction);
@@ -3054,7 +3424,6 @@ public class main_gui extends JFrame
                 sprayButton[k].setForeground(TRANSPARENCY);
                 sprayButton[k].setBackground(TRANSPARENCY);
                 sprayButton[k].setBorder(null);
-                //tmpBut.setText("");
                 sprayButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/spray.png")));
                 sprayButton[k].setLocation((int) currentPartSpraiesData[k][0], (int) currentPartSpraiesData[k][1]);
                 sprayButton[k].addMouseListener(sprayButAction);
@@ -3112,11 +3481,12 @@ public class main_gui extends JFrame
                     propertiesButton[k].setForeground(TRANSPARENCY);
                     propertiesButton[k].setBackground(TRANSPARENCY);
                     propertiesButton[k].setBorder(null);
-                    //tmpBut.setText("");
-
                     propertiesButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/properties_3.png")));
                     propertiesButton[k].setLocation((int) currentPartPropertiesData[k][0], (int) currentPartPropertiesData[k][1]);
                     propertiesButton[k].addMouseListener(propertyButAction);
+                    propertiesButton[k].setFontForExtendedToolTip(casualContactMF);
+
+                    Map.add(propertiesButton[k]);
 
                     //Уникальные иконки для бизнеса
                     if (propertiesButton[k].getX() == propertiesData[15][0] &&
@@ -3124,94 +3494,105 @@ public class main_gui extends JFrame
                     {
                         propertiesButton[k].setIcon(new ImageIcon(ImageIO.read(mainGui_ClassLoader.getResource("Images/kcabs.png"))));
                         propertiesButton[k].setToolTipText(property_15_taxi);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[14][0] &&
                             propertiesButton[k].getY() == propertiesData[14][1])//iceCream
                     {
                         propertiesButton[k].setIcon(new ImageIcon(ImageIO.read(mainGui_ClassLoader.getResource("Images/icecream.png"))));
                         propertiesButton[k].setToolTipText(property_14_iceCream);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[13][0] &&
                             propertiesButton[k].getY() == propertiesData[13][1])//
                     {
                         propertiesButton[k].setIcon(new ImageIcon(ImageIO.read(mainGui_ClassLoader.getResource("Images/boatyard.png"))));
                         propertiesButton[k].setToolTipText(property_13_boatyard);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[12][0] &&
                             propertiesButton[k].getY() == propertiesData[12][1])//
                     {
                         propertiesButton[k].setIcon(new ImageIcon(ImageIO.read(mainGui_ClassLoader.getResource("Images/printworks.png"))));
                         propertiesButton[k].setToolTipText(property_12_printWorkd);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[11][0] &&
                             propertiesButton[k].getY() == propertiesData[11][1])//
                     {
                         propertiesButton[k].setIcon(new ImageIcon(ImageIO.read(mainGui_ClassLoader.getResource("Images/SunYard.png"))));
                         propertiesButton[k].setToolTipText(property_11_carShowroom);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[10][0] &&
                             propertiesButton[k].getY() == propertiesData[10][1])//
                     {
                         propertiesButton[k].setIcon(new ImageIcon(ImageIO.read(mainGui_ClassLoader.getResource("Images/filmstudio.png"))));
                         propertiesButton[k].setToolTipText(property_10_filmStudio);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[9][0] &&
                             propertiesButton[k].getY() == propertiesData[9][1])//
                     {
                         propertiesButton[k].setIcon(new ImageIcon(ImageIO.read(mainGui_ClassLoader.getResource("Images/club.png"))));
                         propertiesButton[k].setToolTipText(property_9_malibu);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[8][0] &&
                             propertiesButton[k].getY() == propertiesData[8][1])//
                     {
                         propertiesButton[k].setIcon(new ImageIcon(ImageIO.read(mainGui_ClassLoader.getResource("Images/radar_strip.png"))));
                         propertiesButton[k].setToolTipText(property_8_polePosition);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[7][0] &&
                             propertiesButton[k].getY() == propertiesData[7][1])//
                     {
                         propertiesButton[k].setToolTipText(property_7_hymanCondo);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[6][0] &&
                             propertiesButton[k].getY() == propertiesData[6][1])//
                     {
                         propertiesButton[k].setToolTipText(property_6_skumoleShack);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[5][0] &&
                             propertiesButton[k].getY() == propertiesData[5][1])//
                     {
                         propertiesButton[k].setToolTipText(property_5_oceanView);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[4][0] &&
                             propertiesButton[k].getY() == propertiesData[4][1])//
                     {
                         propertiesButton[k].setToolTipText(property_4_3321VicePoint);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[3][0] &&
                             propertiesButton[k].getY() == propertiesData[3][1])//
                     {
                         propertiesButton[k].setToolTipText(property_3_elSwanko);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[2][0] &&
                             propertiesButton[k].getY() == propertiesData[2][1])//
                     {
                         propertiesButton[k].setToolTipText(property_2_linksView);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[1][0] &&
                             propertiesButton[k].getY() == propertiesData[1][1])//
                     {
                         propertiesButton[k].setToolTipText(property_1_oceanHeights);
+                        continue;
                     }
                     if (propertiesButton[k].getX() == propertiesData[0][0] &&
                             propertiesButton[k].getY() == propertiesData[0][1])//
                     {
                         propertiesButton[k].setToolTipText(property_0_1102Washington);
+                        continue;
                     }
-
-                    //=============================
-                    propertiesButton[k].setFontForToolTip(casualContactMF);
-
-                    Map.add(propertiesButton[k]);
                 }
                 Map.repaint();
             }
@@ -3274,193 +3655,220 @@ public class main_gui extends JFrame
                 rampageButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/rampage_4.png")));
                 rampageButton[k].setLocation((int) currentPartRampagesData[k][0], (int) currentPartRampagesData[k][1]);
                 rampageButton[k].addMouseListener(rampageButAction);
-
+                rampageButton[k].setFontForExtendedToolTip(toolTipDescription);
+                Map.add(rampageButton[k]);
 
                 if (rampageButton[k].getX() == rampagesData[0][0]
                         && rampageButton[k].getY() == rampagesData[0][1])
                 {
-                    //psevdoToolTip ptt = psevdoToolTip.createPsevdoToolTip("JTextArea в роли всплывающей подсказки.\nУбить 25 членов с M4.");
                     rampageButton[k].setToolTipText(rampage_0);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[1][0]
                         && rampageButton[k].getY() == rampagesData[1][1])
                 {
                     rampageButton[k].setToolTipText(rampage_1);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[2][0]
                         && rampageButton[k].getY() == rampagesData[2][1])
                 {
                     rampageButton[k].setToolTipText(rampage_2);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[3][0]
                         && rampageButton[k].getY() == rampagesData[3][1])
                 {
                     rampageButton[k].setToolTipText(rampage_3);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[4][0]
                         && rampageButton[k].getY() == rampagesData[4][1])
                 {
                     rampageButton[k].setToolTipText(rampage_4);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[5][0]
                         && rampageButton[k].getY() == rampagesData[5][1])
                 {
                     rampageButton[k].setToolTipText(rampage_5);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[6][0]
                         && rampageButton[k].getY() == rampagesData[6][1])
                 {
                     rampageButton[k].setToolTipText(rampage_6);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[7][0]
                         && rampageButton[k].getY() == rampagesData[7][1])
                 {
                     rampageButton[k].setToolTipText(rampage_7);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[8][0]
                         && rampageButton[k].getY() == rampagesData[8][1])
                 {
                     rampageButton[k].setToolTipText(rampage_8);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[9][0]
                         && rampageButton[k].getY() == rampagesData[9][1])
                 {
                     rampageButton[k].setToolTipText(rampage_9);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[10][0]
                         && rampageButton[k].getY() == rampagesData[10][1])
                 {
                     rampageButton[k].setToolTipText(rampage_10);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[11][0]
                         && rampageButton[k].getY() == rampagesData[11][1])
                 {
                     rampageButton[k].setToolTipText(rampage_11);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[12][0]
                         && rampageButton[k].getY() == rampagesData[12][1])
                 {
                     rampageButton[k].setToolTipText(rampage_12);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[13][0]
                         && rampageButton[k].getY() == rampagesData[13][1])
                 {
                     rampageButton[k].setToolTipText(rampage_13);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[14][0]
                         && rampageButton[k].getY() == rampagesData[14][1])
                 {
                     rampageButton[k].setToolTipText(rampage_14);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[15][0]
                         && rampageButton[k].getY() == rampagesData[15][1])
                 {
                     rampageButton[k].setToolTipText(rampage_15);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[16][0]
                         && rampageButton[k].getY() == rampagesData[16][1])
                 {
                     rampageButton[k].setToolTipText(rampage_16);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[17][0]
                         && rampageButton[k].getY() == rampagesData[17][1])
                 {
                     rampageButton[k].setToolTipText(rampage_17);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[18][0]
                         && rampageButton[k].getY() == rampagesData[18][1])
                 {
                     rampageButton[k].setToolTipText(rampage_18);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[19][0]
                         && rampageButton[k].getY() == rampagesData[19][1])
                 {
                     rampageButton[k].setToolTipText(rampage_19);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[20][0]
                         && rampageButton[k].getY() == rampagesData[20][1])
                 {
                     rampageButton[k].setToolTipText(rampage_20);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[21][0]
                         && rampageButton[k].getY() == rampagesData[21][1])
                 {
                     rampageButton[k].setToolTipText(rampage_21);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[22][0]
                         && rampageButton[k].getY() == rampagesData[22][1])
                 {
                     rampageButton[k].setToolTipText(rampage_22);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[23][0]
                         && rampageButton[k].getY() == rampagesData[23][1])
                 {
                     rampageButton[k].setToolTipText(rampage_23);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[24][0]
                         && rampageButton[k].getY() == rampagesData[24][1])
                 {
                     rampageButton[k].setToolTipText(rampage_24);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[25][0]
                         && rampageButton[k].getY() == rampagesData[25][1])
                 {
                     rampageButton[k].setToolTipText(rampage_25);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[26][0]
                         && rampageButton[k].getY() == rampagesData[26][1])
                 {
                     rampageButton[k].setToolTipText(rampage_26);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[27][0]
                         && rampageButton[k].getY() == rampagesData[27][1])
                 {
                     rampageButton[k].setToolTipText(rampage_27);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[28][0]
                         && rampageButton[k].getY() == rampagesData[28][1])
                 {
                     rampageButton[k].setToolTipText(rampage_28);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[29][0]
                         && rampageButton[k].getY() == rampagesData[29][1])
                 {
                     rampageButton[k].setToolTipText(rampage_29);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[30][0]
                         && rampageButton[k].getY() == rampagesData[30][1])
                 {
                     rampageButton[k].setToolTipText(rampage_30);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[31][0]
                         && rampageButton[k].getY() == rampagesData[31][1])
                 {
                     rampageButton[k].setToolTipText(rampage_31);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[32][0]
                         && rampageButton[k].getY() == rampagesData[32][1])
                 {
                     rampageButton[k].setToolTipText(rampage_32);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[33][0]
                         && rampageButton[k].getY() == rampagesData[33][1])
                 {
                     rampageButton[k].setToolTipText(rampage_33);
+                    continue;
                 }
                 if (rampageButton[k].getX() == rampagesData[34][0]
                         && rampageButton[k].getY() == rampagesData[34][1])
                 {
                     rampageButton[k].setToolTipText(rampage_34);
+                    continue;
                 }
-
-                //toolTipDescription = toolTipDescription.deriveFont(Font.BOLD, 14.0f);
-                rampageButton[k].setFontForToolTip(toolTipDescription);
-                //setFont(tmpFont);
-                //==================================
-
-                Map.add(rampageButton[k]);
             }
-            //Map.repaint();
             Map.repaint();
             //Map.paintComponents(Map.getGraphics());
         } else
@@ -3512,15 +3920,14 @@ public class main_gui extends JFrame
                 clothesButton[k].setForeground(TRANSPARENCY);
                 clothesButton[k].setBackground(TRANSPARENCY);
                 clothesButton[k].setBorder(null);
-                //tmpBut.setText("");
                 clothesButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/clothes.png")));
                 clothesButton[k].setLocation((int) currentPartClothesData[k][0], (int) currentPartClothesData[k][1]);
                 clothesButton[k].addMouseListener(clothesButAction);
                 //clothesButton[k].setFontForToolTip(toolTipDescription);
+                clothesButton[k].setFontForExtendedToolTip(casualContactMF);
+
                 Map.add(clothesButton[k]);
 
-
-                clothesButton[k].setFontForToolTip(casualContactMF);
 
                 if (clothesButton[k].getX() == clothesData[0][0]
                         && clothesButton[k].getY() == clothesData[0][1])
@@ -3662,7 +4069,7 @@ public class main_gui extends JFrame
                 weaponButton[k].setLocation((int) currentPartWeaponsData[k][0], (int) currentPartWeaponsData[k][1]);
                 weaponButton[k].addMouseListener(weaponButAction);
 
-                weaponButton[k].setFontForToolTip(casualContactMF);
+                weaponButton[k].setFontForExtendedToolTip(casualContactMF);
                 Map.add(weaponButton[k]);
 
                 //================= Устанавливаем описание-подсказку
@@ -3969,89 +4376,103 @@ public class main_gui extends JFrame
                 storeButton[k].setForeground(TRANSPARENCY);
                 storeButton[k].setBackground(TRANSPARENCY);
                 storeButton[k].setBorder(null);
-                //tmpBut.setText("");
                 storeButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/store_7.png")));
                 storeButton[k].setLocation((int) currentPartStoresData[k][0], (int) currentPartStoresData[k][1]);
                 storeButton[k].addMouseListener(storeButAction);
+                storeButton[k].setFontForExtendedToolTip(casualContactMF);
+
+                Map.add(storeButton[k]);
 
                 if (storeButton[k].getX() == storesData[0][0]
                         && storeButton[k].getY() == storesData[0][1])
                 {
                     storeButton[k].setToolTipText(store_0_bunchOfTools);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[1][0]
                         && storeButton[k].getY() == storesData[1][1])
                 {
                     storeButton[k].setToolTipText(store_1_jewerlyStore);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[2][0]
                         && storeButton[k].getY() == storesData[2][1])
                 {
                     storeButton[k].setToolTipText(store_2_dispansary);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[3][0]
                         && storeButton[k].getY() == storesData[3][1])
                 {
                     storeButton[k].setToolTipText(store_3_cornerStore);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[4][0]
                         && storeButton[k].getY() == storesData[4][1])
                 {
                     storeButton[k].setToolTipText(store_1_jewerlyStore);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[5][0]
                         && storeButton[k].getY() == storesData[5][1])
                 {
                     storeButton[k].setToolTipText(store_5_vinil);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[6][0]
                         && storeButton[k].getY() == storesData[6][1])
                 {
                     storeButton[k].setToolTipText(store_6_tooledUp);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[7][0]
                         && storeButton[k].getY() == storesData[7][1])
                 {
                     storeButton[k].setToolTipText(store_7_gash);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[8][0]
                         && storeButton[k].getY() == storesData[8][1])
                 {
                     storeButton[k].setToolTipText(store_1_jewerlyStore);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[10][0]
                         && storeButton[k].getY() == storesData[10][1])
                 {
                     storeButton[k].setToolTipText(store_10_robinas);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[9][0]
                         && storeButton[k].getY() == storesData[9][1])
                 {
                     storeButton[k].setToolTipText(store_9_pharmacy);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[11][0]
                         && storeButton[k].getY() == storesData[11][1])
                 {
                     storeButton[k].setToolTipText(store_11_screwThis);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[12][0]
                         && storeButton[k].getY() == storesData[12][1])
                 {
                     storeButton[k].setToolTipText(store_12_doughnutShop);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[13][0]
                         && storeButton[k].getY() == storesData[13][1])
                 {
                     storeButton[k].setToolTipText(store_13_laundromat);
+                    continue;
                 }
                 if (storeButton[k].getX() == storesData[14][0]
                         && storeButton[k].getY() == storesData[14][1])
                 {
                     storeButton[k].setToolTipText(store_14_rytonAide);
+                    continue;
                 }
-
-                storeButton[k].setFontForToolTip(casualContactMF);
-                Map.add(storeButton[k]);
             }
             Map.repaint();
 
@@ -4105,321 +4526,379 @@ public class main_gui extends JFrame
                 vehicleButton[k].setForeground(TRANSPARENCY);
                 vehicleButton[k].setBackground(TRANSPARENCY);
                 vehicleButton[k].setBorder(null);
-                //tmpBut.setText("");
                 vehicleButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/vehicle_3.png")));
                 vehicleButton[k].setLocation((int) currentPartVehiclesData[k][0], (int) currentPartVehiclesData[k][1]);
                 vehicleButton[k].addMouseListener(vehicleButAction);
+                vehicleButton[k].setFontForExtendedToolTip(casualContactMF);
+
+                Map.add(vehicleButton[k]);
 
                 if (vehicleButton[k].getX() == vehiclesData[0][0]
                         && vehicleButton[k].getY() == vehiclesData[0][1])
                 {
                     vehicleButton[k].setToolTipText(oceanic_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[1][0]
                         && vehicleButton[k].getY() == vehiclesData[1][1])
                 {
                     vehicleButton[k].setToolTipText(caddy_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[2][0]
                         && vehicleButton[k].getY() == vehiclesData[2][1])
                 {
                     vehicleButton[k].setToolTipText(cheetah_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[3][0]
                         && vehicleButton[k].getY() == vehiclesData[3][1])
                 {
                     vehicleButton[k].setToolTipText(pcj600_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[4][0]
                         && vehicleButton[k].getY() == vehiclesData[4][1])
                 {
                     vehicleButton[k].setToolTipText(pcj600_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[5][0]
                         && vehicleButton[k].getY() == vehiclesData[5][1])
                 {
                     vehicleButton[k].setToolTipText(ambulance_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[6][0]
                         && vehicleButton[k].getY() == vehiclesData[6][1])
                 {
                     vehicleButton[k].setToolTipText(faggio_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[7][0]
                         && vehicleButton[k].getY() == vehiclesData[7][1])
                 {
                     vehicleButton[k].setToolTipText(police_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[8][0]
                         && vehicleButton[k].getY() == vehiclesData[8][1])
                 {
                     vehicleButton[k].setToolTipText(pcj600_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[9][0]
                         && vehicleButton[k].getY() == vehiclesData[9][1])
                 {
                     vehicleButton[k].setToolTipText(coastGuard_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[10][0]
                         && vehicleButton[k].getY() == vehiclesData[10][1])
                 {
                     vehicleButton[k].setToolTipText(rumpo_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[11][0]
                         && vehicleButton[k].getY() == vehiclesData[11][1])
                 {
                     vehicleButton[k].setToolTipText(faggio_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[12][0]
                         && vehicleButton[k].getY() == vehiclesData[12][1])
                 {
                     vehicleButton[k].setToolTipText(police_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[13][0]
                         && vehicleButton[k].getY() == vehiclesData[13][1])
                 {
                     vehicleButton[k].setToolTipText(stinger_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[14][0]
                         && vehicleButton[k].getY() == vehiclesData[14][1])
                 {
                     vehicleButton[k].setToolTipText(banshee_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[15][0]
                         && vehicleButton[k].getY() == vehiclesData[15][1])
                 {
                     vehicleButton[k].setToolTipText(gangBurrito_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[16][0]
                         && vehicleButton[k].getY() == vehiclesData[16][1])
                 {
                     vehicleButton[k].setToolTipText(freeway_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[17][0]
                         && vehicleButton[k].getY() == vehiclesData[17][1])
                 {
                     vehicleButton[k].setToolTipText(hermes_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[18][0]
                         && vehicleButton[k].getY() == vehiclesData[18][1])
                 {
                     vehicleButton[k].setToolTipText(bfInjection);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[19][0]
                         && vehicleButton[k].getY() == vehiclesData[19][1])
                 {
                     vehicleButton[k].setToolTipText(comet_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[20][0]
                         && vehicleButton[k].getY() == vehiclesData[20][1])
                 {
                     vehicleButton[k].setToolTipText("FBI " + washington_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[21][0]
                         && vehicleButton[k].getY() == vehiclesData[21][1])
                 {
                     vehicleButton[k].setToolTipText(freeway_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[22][0]
                         && vehicleButton[k].getY() == vehiclesData[22][1])
                 {
                     vehicleButton[k].setToolTipText(pcj600_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[23][0]
                         && vehicleButton[k].getY() == vehiclesData[23][1])
                 {
                     vehicleButton[k].setToolTipText(policeMaverick_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[24][0]
                         && vehicleButton[k].getY() == vehiclesData[24][1])
                 {
                     vehicleButton[k].setToolTipText(trashmaster_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[25][0]
                         && vehicleButton[k].getY() == vehiclesData[25][1])
                 {
                     vehicleButton[k].setToolTipText(cheetah_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[26][0]
                         && vehicleButton[k].getY() == vehiclesData[26][1])
                 {
                     vehicleButton[k].setToolTipText(ambulance_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[27][0]
                         && vehicleButton[k].getY() == vehiclesData[27][1])
                 {
                     vehicleButton[k].setToolTipText(pizzaBoy_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[28][0]
                         && vehicleButton[k].getY() == vehiclesData[28][1])
                 {
                     vehicleButton[k].setToolTipText(police_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[29][0]
                         && vehicleButton[k].getY() == vehiclesData[29][1])
                 {
                     vehicleButton[k].setToolTipText(firetruck_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[30][0]
                         && vehicleButton[k].getY() == vehiclesData[30][1])
                 {
                     vehicleButton[k].setToolTipText("VCN " + maverick_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[31][0]
                         && vehicleButton[k].getY() == vehiclesData[31][1])
                 {
                     vehicleButton[k].setToolTipText(ambulance_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[32][0]
                         && vehicleButton[k].getY() == vehiclesData[32][1])
                 {
                     vehicleButton[k].setToolTipText(sanchez_vehicle_str + " & " + landstalker_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[33][0]
                         && vehicleButton[k].getY() == vehiclesData[33][1])
                 {
                     vehicleButton[k].setToolTipText(maverick_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[34][0]
                         && vehicleButton[k].getY() == vehiclesData[34][1])
                 {
                     vehicleButton[k].setToolTipText(pizzaBoy_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[35][0]
                         && vehicleButton[k].getY() == vehiclesData[35][1])
                 {
                     vehicleButton[k].setToolTipText(patrion_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[36][0]
                         && vehicleButton[k].getY() == vehiclesData[36][1])
                 {
                     vehicleButton[k].setToolTipText(voodoo_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[37][0]
                         && vehicleButton[k].getY() == vehiclesData[37][1])
                 {
                     vehicleButton[k].setToolTipText(pizzaBoy_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[38][0]
                         && vehicleButton[k].getY() == vehiclesData[38][1])
                 {
                     vehicleButton[k].setToolTipText(securicar_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[39][0]
                         && vehicleButton[k].getY() == vehiclesData[39][1])
                 {
                     vehicleButton[k].setToolTipText(police_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[40][0]
                         && vehicleButton[k].getY() == vehiclesData[40][1])
                 {
                     vehicleButton[k].setToolTipText("Police " + cheetah_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[41][0]
                         && vehicleButton[k].getY() == vehiclesData[41][1])
                 {
                     vehicleButton[k].setToolTipText(pony_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[42][0]
                         && vehicleButton[k].getY() == vehiclesData[42][1])
                 {
                     vehicleButton[k].setToolTipText(linerunner_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[43][0]
                         && vehicleButton[k].getY() == vehiclesData[43][1])
                 {
                     vehicleButton[k].setToolTipText(baggageHandler_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[44][0]
                         && vehicleButton[k].getY() == vehiclesData[44][1])
                 {
                     vehicleButton[k].setToolTipText(topFun_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[45][0]
                         && vehicleButton[k].getY() == vehiclesData[45][1])
                 {
                     vehicleButton[k].setToolTipText(bus_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[46][0]
                         && vehicleButton[k].getY() == vehiclesData[46][1])
                 {
                     vehicleButton[k].setToolTipText(sentinelXS_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[47][0]
                         && vehicleButton[k].getY() == vehiclesData[47][1])
                 {
                     vehicleButton[k].setToolTipText(infernus_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[48][0]
                         && vehicleButton[k].getY() == vehiclesData[48][1])
                 {
                     vehicleButton[k].setToolTipText(comet_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[49][0]
                         && vehicleButton[k].getY() == vehiclesData[49][1])
                 {
                     vehicleButton[k].setToolTipText(landstalker_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[50][0]
                         && vehicleButton[k].getY() == vehiclesData[50][1])
                 {
                     vehicleButton[k].setToolTipText(admiral_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[51][0]
                         && vehicleButton[k].getY() == vehiclesData[51][1])
                 {
                     vehicleButton[k].setToolTipText(phoenix_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[52][0]
                         && vehicleButton[k].getY() == vehiclesData[52][1])
                 {
                     vehicleButton[k].setToolTipText(infernus_vehicle_str);
+                    continue;
                 }
                 if (vehicleButton[k].getX() == vehiclesData[53][0]
                         && vehicleButton[k].getY() == vehiclesData[53][1])
                 {
                     vehicleButton[k].setToolTipText(faggio_vehicle_str);
+                    continue;
                 }
 
                 if (vehicleButton[k].getX() == vehiclesData[54][0]
                         && vehicleButton[k].getY() == vehiclesData[54][1])
                 {
                     vehicleButton[k].setToolTipText("Packer");
+                    continue;
                 }
 
                 if (vehicleButton[k].getX() == vehiclesData[55][0]
                         && vehicleButton[k].getY() == vehiclesData[55][1])
                 {
                     vehicleButton[k].setToolTipText(baggageHandler_vehicle_str);
+                    continue;
                 }
 
                 if (vehicleButton[k].getX() == vehiclesData[56][0]
                         && vehicleButton[k].getY() == vehiclesData[56][1])
                 {
                     vehicleButton[k].setToolTipText(barracksOL_vehicle_str);
+                    continue;
                 }
 
                 if (vehicleButton[k].getX() == vehiclesData[57][0]
                         && vehicleButton[k].getY() == vehiclesData[57][1])
                 {
                     vehicleButton[k].setToolTipText(patrion_vehicle_str);
+                    continue;
                 }
 
                 if (vehicleButton[k].getX() == vehiclesData[58][0]
                         && vehicleButton[k].getY() == vehiclesData[58][1])
                 {
                     vehicleButton[k].setToolTipText(topFun_vehicle_str);
+                    continue;
                 }
 
                 if (vehicleButton[k].getX() == vehiclesData[59][0]
                         && vehicleButton[k].getY() == vehiclesData[59][1])
                 {
                     vehicleButton[k].setToolTipText(topFun_vehicle_str);
+                    continue;
                 }
-
-                vehicleButton[k].setFontForToolTip(casualContactMF);
-
-                Map.add(vehicleButton[k]);
             }
             Map.repaint();
 
@@ -4465,18 +4944,22 @@ public class main_gui extends JFrame
             UniqueJumps_JCheckBox.setText("[" + currentPartUniqueJumpsData.length + "] " + uniqueJumps_str);
             uniqueJumpButton = new ButtonExtended[currentPartUniqueJumpsData.length];
             UniqueJumpAction uniqueJumpAction = new UniqueJumpAction(uniqueJumpsData, mainGui_ClassLoader, this);
+
+            long time = System.currentTimeMillis();
             for (int k = 0; k < uniqueJumpButton.length; k++)
             {
+                DebugTools.printDebugMessage("Времени ушло на одну кнопку уникального прыжка: " + (System.currentTimeMillis() - time));
+                time = System.currentTimeMillis();
                 uniqueJumpButton[k] = new ButtonExtended();
                 uniqueJumpButton[k].setSize(18, 18);
                 uniqueJumpButton[k].setForeground(TRANSPARENCY);
                 uniqueJumpButton[k].setBackground(TRANSPARENCY);
                 uniqueJumpButton[k].setBorder(null);
-                //tmpBut.setText("");
                 uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-down.png")));
                 uniqueJumpButton[k].setLocation((int) currentPartUniqueJumpsData[k][0], (int) currentPartUniqueJumpsData[k][1]);
                 uniqueJumpButton[k].addMouseListener(uniqueJumpAction);
-                uniqueJumpButton[k].setFontForToolTip(toolTipDescription);
+                uniqueJumpButton[k].setFontForExtendedToolTip(toolTipDescription);
+                Map.add(uniqueJumpButton[k]);
 
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[0][0] &&
@@ -4484,6 +4967,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-left.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_0);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[1][0] &&
@@ -4491,6 +4975,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-right.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_1);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[2][0] &&
@@ -4498,6 +4983,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-left.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_2);
+                    continue;
                 }
 
 
@@ -4505,6 +4991,7 @@ public class main_gui extends JFrame
                         uniqueJumpButton[k].getY() == uniqueJumpsData[8][1])
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump.png")));
+                    continue;
                 }
 
 
@@ -4512,18 +4999,21 @@ public class main_gui extends JFrame
                         uniqueJumpButton[k].getY() == uniqueJumpsData[3][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_3);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[4][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[4][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_4);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[5][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[5][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_5);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[6][0] &&
@@ -4531,24 +5021,28 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_6);
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-left.png")));
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[7][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[7][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_7);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[8][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[8][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_8);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[9][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[9][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_9);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[10][0] &&
@@ -4556,6 +5050,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-right.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_10);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[11][0] &&
@@ -4563,24 +5058,28 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_11);
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-right.png")));
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[12][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[12][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_12);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[13][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[13][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_13);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[14][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[14][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_14);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[15][0] &&
@@ -4588,18 +5087,21 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_15);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[16][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[16][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_16);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[17][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[17][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_17);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[18][0] &&
@@ -4607,6 +5109,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-left.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_18);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[19][0] &&
@@ -4614,12 +5117,14 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_19);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[20][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[20][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_20);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[21][0] &&
@@ -4627,18 +5132,21 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_21);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[22][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[22][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_22);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[23][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[23][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_23);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[24][0] &&
@@ -4646,12 +5154,14 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-right.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_24);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[25][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[25][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_25);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[26][0] &&
@@ -4659,12 +5169,14 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-right.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_26);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[27][0] &&
                         uniqueJumpButton[k].getY() == uniqueJumpsData[27][1])
                 {
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_27);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[28][0] &&
@@ -4672,6 +5184,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-right.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_28);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[29][0] &&
@@ -4679,6 +5192,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-right.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_29);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[30][0] &&
@@ -4686,6 +5200,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-left.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_30);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[31][0] &&
@@ -4693,6 +5208,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-right.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_31);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[32][0] &&
@@ -4700,6 +5216,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-left.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_32);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[33][0] &&
@@ -4707,6 +5224,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-left.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_33);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[34][0] &&
@@ -4714,6 +5232,7 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump-right.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_34);
+                    continue;
                 }
 
                 if (uniqueJumpButton[k].getX() == uniqueJumpsData[35][0] &&
@@ -4721,10 +5240,8 @@ public class main_gui extends JFrame
                 {
                     uniqueJumpButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/uniqueJump.png")));
                     uniqueJumpButton[k].setTextToExtendedToolTip(uniqueJump_35);
+                    continue;
                 }
-
-
-                Map.add(uniqueJumpButton[k]);
             }
             Map.repaint();
 
@@ -4835,50 +5352,60 @@ public class main_gui extends JFrame
                 secretsButton[k].setForeground(TRANSPARENCY);
                 secretsButton[k].setBackground(TRANSPARENCY);
                 secretsButton[k].setBorder(null);
-                //tmpBut.setText("");
                 secretsButton[k].setIcon(new ImageIcon(mainGui_ClassLoader.getResource("Images/secret.png")));
                 secretsButton[k].setLocation((int) currentPartSecretsData[k][0], (int) currentPartSecretsData[k][1]);
                 secretsButton[k].addMouseListener(secretButAction);
+                secretsButton[k].setFontForExtendedToolTip(toolTipDescription);
+
+                Map.add(secretsButton[k]);
 
                 if (secretsButton[k].getX() == secretsData[0][0]
                         && secretsButton[k].getY() == secretsData[0][1])
                 {
                     secretsButton[k].setToolTipText(secret_0_sunkenReefer);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[1][0]
                         && secretsButton[k].getY() == secretsData[1][1])
                 {
                     secretsButton[k].setToolTipText(secret_1_fatManUnderWater);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[2][0]
                         && secretsButton[k].getY() == secretsData[2][1])
                 {
                     secretsButton[k].setToolTipText(secret_2_vehicleUnderWater);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[3][0]
                         && secretsButton[k].getY() == secretsData[3][1])
                 {
                     secretsButton[k].setToolTipText(secret_3_easterEgg);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[4][0]
                         && secretsButton[k].getY() == secretsData[4][1])
                 {
                     secretsButton[k].setToolTipText(secret_4_humansOrgans);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[5][0]
                         && secretsButton[k].getY() == secretsData[5][1])
                 {
                     secretsButton[k].setToolTipText(secret_5_lifeIsBitch);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[6][0]
                         && secretsButton[k].getY() == secretsData[6][1])
                 {
                     secretsButton[k].setToolTipText(secret_6);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[7][0]
                         && secretsButton[k].getY() == secretsData[7][1])
                 {
                     secretsButton[k].setToolTipText(secret_7_rockstarLogoPool);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[8][0]
                         && secretsButton[k].getY() == secretsData[8][1])
@@ -4889,41 +5416,44 @@ public class main_gui extends JFrame
                         && secretsButton[k].getY() == secretsData[9][1])
                 {
                     secretsButton[k].setToolTipText(secret_9);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[10][0]
                         && secretsButton[k].getY() == secretsData[10][1])
                 {
                     secretsButton[k].setToolTipText(secret_10_manUnderWater);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[11][0]
                         && secretsButton[k].getY() == secretsData[11][1])
                 {
                     secretsButton[k].setToolTipText(secret_11_submarine);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[12][0]
                         && secretsButton[k].getY() == secretsData[12][1])
                 {
                     secretsButton[k].setToolTipText(secret_12_sunkenContainerShip);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[13][0]
                         && secretsButton[k].getY() == secretsData[13][1])
                 {
                     secretsButton[k].setToolTipText(secret_13_dick);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[14][0]
                         && secretsButton[k].getY() == secretsData[14][1])
                 {
                     secretsButton[k].setToolTipText(secret_14_apartment3c);
+                    continue;
                 }
                 if (secretsButton[k].getX() == secretsData[15][0]
                         && secretsButton[k].getY() == secretsData[15][1])
                 {
                     secretsButton[k].setToolTipText(secret_15_sunkenContainerShip);
+                    continue;
                 }
-
-                secretsButton[k].setFontForToolTip(toolTipDescription);
-
-                Map.add(secretsButton[k]);
             }
             Map.repaint();
 
@@ -7239,7 +7769,6 @@ public class main_gui extends JFrame
     {
         return Spraies_JCheckBox;
     }
-
 
     public JCheckBox getSecrets_JCheckBox()
     {

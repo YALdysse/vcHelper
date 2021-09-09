@@ -110,6 +110,9 @@ public class ArmorButtonAction extends MouseAdapter
                     }
                 }
             }
+            tmpButton.setBackground(main_gui.TRANSPARENCY);
+            tmpButton.setBorder(null);
+            tmpButton.setOpaque(false);
         }
     }
 }

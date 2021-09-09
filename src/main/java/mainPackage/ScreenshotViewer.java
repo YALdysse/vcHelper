@@ -1,5 +1,5 @@
 /* Vice City Helper
- * Copyright (C) 2021 Yaroslav Lytvynov
+ * Copyright (C) 2021 Yaroslav Lytvynov aka YALdysse
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 /**
- * @author Y@L
+ * @author Y@Ldysse
  */
 public class ScreenshotViewer extends JComponent
 {
@@ -74,13 +74,9 @@ public class ScreenshotViewer extends JComponent
         JMenu main_Menu = new JMenu();
         JMenuItem exit_MenuItem = new JMenuItem();
 
-        exit_MenuItem.setSize(1, 1);
-        main_Menu.setSize(1, 1);
         main_MenuBar.setSize(1, 1);
+        main_MenuBar.setPreferredSize(new Dimension(0, 0));
 
-        exit_MenuItem.setLocation(1, 1);
-        main_Menu.setLocation(1, 1);
-        main_MenuBar.setLocation(1, 1);
 
         exit_MenuItem.setBackground(new Color(0, 0, 0, 0));
 
@@ -109,14 +105,16 @@ public class ScreenshotViewer extends JComponent
         frm.add(main_MenuBar, BorderLayout.NORTH);
         //pack();
         frm.setVisible(true);
-
     }
 
 
     protected void paintComponent(Graphics g)
     {
-        if(img==null)
-        {DebugTools.printDebugMessage("Изображение не найдено."); return;}
+        if (img == null)
+        {
+            DebugTools.printDebugMessage("Изображение не найдено.");
+            return;
+        }
         DebugTools.printDebugMessage("Процент заполнения окна: " + imageScallingPercent);
         g.drawImage(img, 0, 0, (int) ((double) getWidth() * ((double) imageScallingPercent / 100.0)), (int) ((double) getHeight() * ((double) imageScallingPercent / 100.0)), this);
     }

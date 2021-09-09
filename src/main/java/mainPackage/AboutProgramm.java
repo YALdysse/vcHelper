@@ -23,9 +23,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 
 /**
@@ -39,19 +37,18 @@ public class AboutProgramm extends javax.swing.JFrame
     public AboutProgramm()
     {
         initComponents();
+        loadThanksInfo();
+        loadLicenseInfo();
     }
 
     private void initComponents()
     {
-
         aboutProgram_jTabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         authorCopyright_jTextField = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         description_jTextArea = new javax.swing.JTextArea();
         title_jLabel = new javax.swing.JLabel();
-        support_jLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jPanel2 = new javax.swing.JPanel();
@@ -73,9 +70,10 @@ public class AboutProgramm extends javax.swing.JFrame
         description_jTextArea.setEditable(false);
         description_jTextArea.setColumns(20);
         description_jTextArea.setLineWrap(true);
-        description_jTextArea.setRows(4);
+        description_jTextArea.setRows(5);
         description_jTextArea.setTabSize(33);
-        description_jTextArea.setText("Данная программа поможет вам пройти Grand Theft Auto: Vice City на 100%. А именно: отыскать 100 скрытых пакетов, утолить 35 вспышек ярости, выполнить 35 уникальных прыжков, ограбить 15 магазинов, угнать кучу автомобилей, приобрести уйму недвижимости и овладеть тонной огнестрельного оружия.");
+        description_jTextArea.setText("Данная программа поможет вам пройти Grand Theft Auto: Vice City на 100%. А именно: отыскать 100 скрытых пакетов, утолить 35 вспышек ярости, выполнить 35 уникальных прыжков, ограбить 15 магазинов, угнать кучу автомобилей, приобрести уйму недвижимости и овладеть тонной огнестрельного оружия."
+        + "Рекомендуется посетить библиотеку Vice City, где можно узнать множество информации об данной видеоигре.");
         description_jTextArea.setBackground(new Color(238, 238, 238));
         description_jTextArea.setBorder(null);
         jScrollPane2.setViewportView(description_jTextArea);
@@ -112,11 +110,6 @@ public class AboutProgramm extends javax.swing.JFrame
         title_jLabel.setForeground(new Color(251, 80, 226));
         title_jLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        support_jLabel.setText("Нашли ошибку ? Есть предложение ? Пишите сюда!");
-
-        jTextField1.setEditable(false);
-        jTextField1.setText("Yaroslav_A_Litvinov@yahoo.com");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,9 +121,7 @@ public class AboutProgramm extends javax.swing.JFrame
                                         .addComponent(jScrollPane2)
                                         .addComponent(title_jLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(support_jLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
@@ -143,35 +134,17 @@ public class AboutProgramm extends javax.swing.JFrame
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(support_jLabel)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(27, 27, 27)
-                                .addComponent(authorCopyright_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                                .addComponent(authorCopyright_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         aboutProgram_jTabbedPane.addTab("О программе", jPanel1);
 
         jTextPane1.setEditable(false);
-        jTextPane1.setText("Выражаю благодарность:\n\t* Веб-сайту [ http://en.wikigta.org/ ] за предоставленные материалы\n\t* Веб-сайту [ http://selmiak.bplaced.net/ ] за предоставленные материалы\n\t* Веб-сайту [ https://gta.com.ua/ ] за предоставленные материалы\n\t* Веб-сайту [ https://www.flaticon.com/ ] за иконки\n\t* Веб-сайту [ https://gta.ag.ru/ ] за информацию об видеоигре" +
-                "\n\t* @joyo2 за карту Вайс-сити\n\t* @Huggito Baggio за подробную карту Вайс-сити\n\t* Веб-сайту [ https://rockstargame.su/ ] за информацию об игре\n\t* Веб-сайту [ https://games.mail.ru/ ] за материалы об игре\n\t * Веб-сайту [ https://gamesisart.ru/ ] за статью о прохождении миссий"
-                + "\n\t* Артёму Литвинову за помощь в организации базы данных"
-                + "\n\nВнимание: Наработки, которые использовались в проекте пренадлежат авторам этих наработок (см. выше)!");
         jTextPane1.setFont(descriptionFont.deriveFont(Font.PLAIN, 15.0f));
 
-        //Стиль для раздела благодарность
-        SimpleAttributeSet dxd = new SimpleAttributeSet();
-        StyleConstants.setFontSize(dxd, jTextPane1.getFont().getSize() + 4);
-        StyleConstants.setForeground(dxd, new Color(239, 73, 73));
-        StyleConstants.setBold(dxd, true);
-        int startIndex = jTextPane1.getText().indexOf("Внимание:");
-        int length = jTextPane1.getText().length() - startIndex;
-        jTextPane1.getStyledDocument().setCharacterAttributes(startIndex, length, dxd, true);
-        //===============================
-
-        license_jTextPane.setText("Данное программное обеспечение распостраняется по свободной лицензии GNU GPL v3. Изменение и/или распостранение исходного кода согласно условиям лицензии.");
         license_jTextPane.setFont(descriptionFont.deriveFont(Font.ITALIC, 16.0f));
-        license_jTextPane.setForeground(new Color(177, 122, 34, 255));
+        license_jTextPane.setForeground(new Color(158, 110, 32, 255));
         license_jTextPane.setBackground(new Color(238, 238, 238));
 
         jTextPane1.setBackground(new Color(238, 238, 238));
@@ -221,6 +194,68 @@ public class AboutProgramm extends javax.swing.JFrame
         pack();
     }
 
+    private void loadThanksInfo()
+    {
+        URL ThanksFile_URL = getClass().getClassLoader().getResource("Thanks.text");
+
+
+        StringBuilder strBuilder = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(ThanksFile_URL.openStream())))
+        {
+            String tmpStr = br.readLine();
+
+            while (tmpStr != null)
+            {
+                strBuilder.append(tmpStr);
+                strBuilder.append("\n");
+                tmpStr = br.readLine();
+            }
+        }
+        catch (IOException ioExc)
+        {
+            DebugTools.printDebugMessage("Ошибка чтения файла Thanks.text");
+        }
+
+        jTextPane1.setText(strBuilder.toString());
+
+        //Стиль для раздела благодарность
+        SimpleAttributeSet dxd = new SimpleAttributeSet();
+        StyleConstants.setFontSize(dxd, jTextPane1.getFont().getSize() + 4);
+        StyleConstants.setForeground(dxd, new Color(239, 73, 73));
+        StyleConstants.setBold(dxd, true);
+        int startIndex = jTextPane1.getText().indexOf("Внимание:");
+        int length = jTextPane1.getText().length() - startIndex;
+        jTextPane1.getStyledDocument().setCharacterAttributes(startIndex, length, dxd, true);
+        //===============================
+    }
+
+    private void loadLicenseInfo()
+    {
+        URL ThanksFile_URL = getClass().getClassLoader().getResource("LIcence.text");
+
+
+        StringBuilder strBuilder = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(ThanksFile_URL.openStream())))
+        {
+            String tmpStr = br.readLine();
+
+            while (tmpStr != null)
+            {
+                strBuilder.append(tmpStr);
+                strBuilder.append("\n");
+                tmpStr = br.readLine();
+            }
+        }
+        catch (IOException ioExc)
+        {
+            DebugTools.printDebugMessage("Ошибка чтения файла License.text");
+        }
+
+        license_jTextPane.setText(strBuilder.toString());
+    }
+
 
     private javax.swing.JTabbedPane aboutProgram_jTabbedPane;
     private javax.swing.JTextField authorCopyright_jTextField;
@@ -230,9 +265,7 @@ public class AboutProgramm extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane license_jTextPane;
-    private javax.swing.JLabel support_jLabel;
     private javax.swing.JLabel title_jLabel;
 }

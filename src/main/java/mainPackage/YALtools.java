@@ -97,14 +97,18 @@ public class YALtools
                     }
                 } else //Переносим на новую строку
                 {
-                    DebugTools.printDebugMessage("Ширина текущей строки: " + currentLineWidth);
                     currentLineWidth = 0;
                     strBuilder_obj.append("\n");
                     lines.add(strBuilder_obj.toString());
                     strBuilder_obj.delete(0, strBuilder_obj.capacity());
 
                     strBuilder_obj.append(words[k]);
-                    //strBuilder_obj.append(" ");
+                    currentLineWidth += getTextWidth(words[k], aMessageFont, aComponent);
+
+                    if (k + 1 == words.length)
+                    {
+                        lines.add(strBuilder_obj.toString());
+                    }
                 }
             } else
             {
@@ -138,6 +142,30 @@ public class YALtools
     }
 
     /**
+     * Возвращает самую длинную строку из коллекции строк ArrayList<String>.
+     * Внимание: метод расчитан на роботу с коллекцией ArrayList<String> с соотношением: элемент коллекции - строка.
+     *
+     * @param aText_ArrayList Коллекция, включающая текст разбитый на строки в каждый элемент этой же коллекции
+     * @return String з наибольшим количеством элементов
+     * @Y@Ldysse
+     */
+    public static String getMostWidthString(final ArrayList<String> aText_ArrayList, final Font aFont, final Component aComponent)
+    {
+        String maxLength_str = "";
+        double maxLengthLine = 0;
+
+        for (String currentLine_str : aText_ArrayList)
+        {
+            if (maxLengthLine < getTextWidth(currentLine_str, aFont, aComponent))
+            {
+                maxLength_str = currentLine_str;
+                maxLengthLine = getTextWidth(currentLine_str, aFont, aComponent);
+            }
+        }
+        return maxLength_str;
+    }
+
+    /**
      * Возвращает ширину строки текста с учетом заданного шрифта
      *
      * @param aMessage     Входная строка текста
@@ -150,12 +178,7 @@ public class YALtools
         double textWidth = 0;
         FontMetrics fm_obj = aComponent.getFontMetrics(aMessageFont);
 
-        for (int k = 0; k < aMessage.length(); k++)
-        {
-            textWidth += fm_obj.charWidth(aMessage.charAt(k));
-        }
-
-        return textWidth;
+        return fm_obj.stringWidth(aMessage);
     }
 
     public static double getTextWidth(final String aMessage, final int countCharacters, final Font aMessageFont, final Component aComponent)
@@ -171,12 +194,14 @@ public class YALtools
         return textWidth;
     }
 
-    /**Возвращает массив индексов вхождение определенного символа в тексте
-     * @author Y@Ldysse
+    /**
+     * Возвращает массив индексов вхождение определенного символа в тексте
+     *
      * @param aText Входящий текст, в котором будет произведен поиск
      * @param aChar Символ, количество вхождений которого нужно подсчитать
      * @return int[] с индексами вхождения символа
-     * */
+     * @author Y@Ldysse
+     */
     public static int[] searchCharInText(final String aText, final char aChar)
     {
         StringBuilder strBuilder_obj = new StringBuilder();

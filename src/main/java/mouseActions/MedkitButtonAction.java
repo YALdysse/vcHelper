@@ -23,6 +23,7 @@ import mainPackage.main_gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -81,6 +82,8 @@ public class MedkitButtonAction extends MouseAdapter
         {
             //System.out.println("нажаат левая клавиша мишы");
             JButton tmpButton = (JButton) e.getSource();
+            tmpButton.setBackground(main_gui.TRANSPARENCY);
+            tmpButton.setBorder(null);
 
             for (int k = 0; k < medkitData.length; k++)
             {
@@ -93,7 +96,7 @@ public class MedkitButtonAction extends MouseAdapter
                             BufferedImage bufImg = ImageIO.read(main_gui.mainGui_ClassLoader.getResource("Images/Screenshots/Medkit/medkit_" + k + ".jpg"));
                             ScreenshotViewer view = new ScreenshotViewer(bufImg, "medkit_" + k);
                             view.setImageScallingPercent(100);
-                            view.setVisible(true);
+                            //view.setVisible(true);
                             break;
                         }
                         catch (IOException IOExc)
@@ -108,9 +111,13 @@ public class MedkitButtonAction extends MouseAdapter
                             DebugTools.createLogFile(illegArgumExc);
                             return;
                         }
+                        tmpButton.setBackground(main_gui.TRANSPARENCY);
+                        tmpButton.setBorder(null);
+                        tmpButton.setOpaque(false);
                     }
                 }
             }
+
         }
     }
 
